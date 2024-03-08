@@ -48,14 +48,16 @@ if (isset($_GET['search']) && $_GET['search'] != '') {
                         <h5 class="text-center">ผู้ประกอบการ</h5>
                         <ul>
                             <li>
-                                <div></div><span>ไม่มีขั้นตอนยุ่งยากในการลงขาย</span>
+                                <div></div>
+                                <span>ไม่มีขั้นตอนยุ่งยากในการลงขาย</span>
                             </li>
                             <li>
-                                <div></div><span>มีระบบหลังบ้าน
-                                    ที่ทำให้คุณจัดการรายการประกาศได้สะดวก</span>
+                                <div></div>
+                                <span>มีระบบหลังบ้านที่ทำให้คุณจัดการรายการประกาศได้สะดวก</span>
                             </li>
                         </ul>
-                        <div style="text-align: center; margin-top: 30px"><a href="../register.php" style="padding: 10px 48px; border-radius: 3px; background-color: rgb(13, 28, 99); color: rgb(255, 255, 255); cursor: pointer;">เปิดร้าน</a>
+                        <div style="text-align: center; margin-top: 30px">
+                            <a href="../register.php" style="padding: 10px 48px; border-radius: 3px; background-color: rgb(13, 28, 99); color: rgb(255, 255, 255); cursor: pointer;">เปิดร้าน</a>
                         </div>
                     </div>
                 </div>
@@ -70,6 +72,9 @@ if (isset($_GET['search']) && $_GET['search'] != '') {
                                 <div></div><span>เรามีสินค้าที่หลากหลายครอบคลุมทุกหมวดหมู่</span>
                             </li>
                         </ul>
+                        <div style="text-align: center; margin-top: 30px">
+                            <a href="../register.php" style="padding: 10px 48px; border-radius: 3px; background-color: rgb(13, 28, 99); color: rgb(255, 255, 255); cursor: pointer;">สมัครสมาชิก</a>
+                        </div>
                     </div>
                 </div>
             </div>
