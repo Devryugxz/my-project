@@ -1,6 +1,57 @@
 <?php
 session_start();
 require_once('config/db.php');
+
+if (!empty($_GET['action'])) {
+  switch ($_GET['action']) {
+    case "add":
+      if (!empty($_POST["p_qty"])) {
+        $stmt = $conn->prepare("SELECT * FROM tb_product WHERE p_id = :p_id");
+        $stmt->bindParam(':p_id', $_GET["p_id"]);
+        $stmt->execute();
+        $p_array = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        if (!empty($p_array)) {
+          $itemArray = array($p_array[0]["p_id"] => array(
+            'p_name' => $p_array[0]["p_name"],
+            'p_qty' => $_POST["p_qty"],
+            'p_price' => $p_array[0]["p_price"],
+            'p_img' => $p_array[0]["p_img"]
+          ));
+        }
+        if (!empty($_SESSION["cart_item"])) {
+          if (array_key_exists($p_array[0]["p_id"], $_SESSION["cart_item"])) {
+            $_SESSION["cart_item"][$p_array[0]["p_id"]]["p_qty"] += $_POST["p_qty"];
+          } else {
+            $_SESSION["cart_item"] += $itemArray;
+          }
+        } else {
+          $_SESSION["cart_item"] = $itemArray;
+        }
+      }
+      break;
+    case "remove":
+      if (!empty($_SESSION["cart_item"]) && !empty($_GET["p_id"])) {
+        unset($_SESSION["cart_item"][$_GET["p_id"]]);
+        if (empty($_SESSION["cart_item"])) {
+          unset($_SESSION["cart_item"]);
+        }
+      }
+      break;
+      case "empty":
+        unset($_SESSION["cart_item"]);
+        break;
+  }
+}
+
+if (isset($_POST['update_cart'])) {
+  foreach ($_POST['quantity'] as $key => $value) {
+    if (!empty($value) && is_numeric($value)) {
+      $_SESSION["cart_item"][$key]["p_qty"] = $value;
+    }
+  }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -12,22 +63,21 @@ require_once('config/db.php');
 <body>
   <?php include('menutop.php'); ?>
 
+
   <div class="site-section">
     <div class="container">
 
       <div class="row mb-5">
         <form class="col-md-12" method="post">
           <div class="site-blocks-table">
-
             <?php
-
-            $total_quantity = 0;
-            $total_price = 0;
-
             if (isset($_SESSION["cart_item"])) {
-
+              $total_quantity = 0;
+              $total_price = 0;
             ?>
-
+            <div style="text-align: end;">
+              <a href=" cart.php?action=empty" id="btnEmpty">ลบทั้งหมด</a>
+            </div>
               <table class="table table-bordered">
                 <thead>
                   <tr>
@@ -36,56 +86,45 @@ require_once('config/db.php');
                     <th class="product-price">ราคาต่อหน่วย</th>
                     <th class="product-quantity">จำนวน</th>
                     <th class="product-total">ราคารวม</th>
-                    <th class="product-remove">ลบ</th>
+                    <th class="product-remove" style="text-align: center;">ลบ</th>
                   </tr>
-
-                  <?php
-
-                  foreach ($_SESSION["cart_item"] as $item) {
-                    $item_price = $item["quantity"] * $item["Product_Price"];
-
-                  ?>
 
                 </thead>
+
                 <tbody>
-                  <tr>
-                    <td class="product-thumbnail">
-                      <img src="<?php echo $item["Product_img"]; ?>" alt="" class="img-fluid">
-                    </td>
-                    <td class="product-name">
-                      <h2 class="h5 text-black"><?php echo $item["Product_Name"]; ?></h2>
-                    </td>
-                    <td><?php echo "฿ " . $item["Product_Price"]; ?></td>
-                    <td>
-                      <div class="input-group mb-3" style="max-width: 120px;">
-                        <?php echo $item["quantity"]; ?>
-                      </div>
-                    </td>
-                    <td><?php echo "฿ " . number_format($item["Product_Price"], 2); ?></td>
-                    <td><a href="cart.php?action=remove&code=<?php echo $item["Product_ID"]; ?>" class="btn btn-primary btn-sm">X</a></td>
-                  </tr>
-
-                <?php
-
-                    $total_quantity += $item["quantity"];
-                    $total_price += ($item["Product_Price"] * $item["quantity"]);
+                  <?php
+                  foreach ($_SESSION["cart_item"] as $item) {
+                    $item_price = $item["p_qty"] * $item["p_price"];
+                  ?>
+                    <tr>
+                      <td class="product-thumbnail">
+                        <img src="<?php echo $item["p_img"]; ?>" class="img-fluid">
+                      </td>
+                      <td class="product-name">
+                        <h2 class="h5 text-black"><?php echo $item["p_name"]; ?></h2>
+                      </td>
+                      <td class="product-price"><?php echo "฿ " . $item["p_price"]; ?></td>
+                      <td class="product-quantity">
+                        <div class="input-group mb-3" style="max-width: 120px;">
+                          <?php echo $item["p_qty"]; ?>
+                        </div>
+                      </td>
+                      <td class="product-total"><?php echo "฿ " . $item_price; ?></td>
+                      <td class="product-remove" style="text-align: center;">
+                        <a href="cart.php?action=remove&p_id=<?= $item["p_id"] ?? ''; ?>" class="btn btn-danger btn-sm">ลบ</a>
+                      </td>
+                    </tr>
+                  <?php
+                    $total_quantity += $item["p_qty"];
+                    $total_price += $item_price;
                   }
+                  ?>
 
-                ?>
+
                 </tbody>
               </table>
 
-            <?php
-            } else {
-            ?>
-
-              <div class="no-records text-center h3">ไม่พบสินค้า</div>
-
-            <?php
-
-            }
-
-            ?>
+            
 
           </div>
         </form>
@@ -95,12 +134,13 @@ require_once('config/db.php');
         <div class="col-md-6">
           <div class="row mb-5">
             <div class="col-md-6 mb-3 mb-md-0">
-              <button class="btn btn-primary btn-sm btn-block">อัพเดทตะกร้า</button>
+              <button class="btn btn-primary btn-sm btn-block" type="submit" name="update_cart">อัพเดทตะกร้า</button>
             </div>
             <div class="col-md-6">
-              <button class="btn btn-outline-primary btn-sm btn-block">เลือกสินค้าต่อ</button>
+              <button class="btn btn-outline-primary btn-sm btn-block" onclick="window.location='../member/index.php'">เลือกสินค้าต่อ</button>
             </div>
           </div>
+
           <div class="row">
             <div class="col-md-12">
               <label class="text-black h4" for="coupon">โค้ดส่วนลด</label>
@@ -146,6 +186,17 @@ require_once('config/db.php');
             </div>
           </div>
         </div>
+        <?php
+            } else {
+            ?>
+
+              <div class="no-records text-center h3">ไม่พบสินค้า</div>
+
+            <?php
+
+            }
+
+            ?>
       </div>
     </div>
   </div>

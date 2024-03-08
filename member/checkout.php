@@ -1,6 +1,14 @@
 <?php
 session_start();
 require_once('config/db.php');
+
+// ดึงข้อมูลผู้ใช้จากฐานข้อมูล
+if (isset($_SESSION['member'])) {
+    $m_id = $_SESSION['member'];
+    $stmt = $conn->query("SELECT * FROM tb_users WHERE id = $m_id");
+    $stmt->execute();
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+}
 ?>
 
 <!DOCTYPE html>
@@ -20,25 +28,19 @@ require_once('config/db.php');
                     <div class="p-3 p-lg-5 border">
                         <div class="form-group row">
                             <div class="col-md-6">
-                                <label for="c_fname" class="text-black">ชื่อ<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="c_fname" name="c_fname">
+                                <label for="m_name" class="text-black">ชื่อ-สกุล<span class="text-danger">*</span></label>
+                                <input class="form-control" type="text" id="m_name" name="m_name" value="<?= $user['m_name'] ?>">
                             </div>
                             <div class="col-md-6">
-                                <label for="c_lname" class="text-black">นามสกุล<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="c_lname" name="c_lname">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-
-                            <div class="col-md-6">
-                                <label for="c_phone" class="text-black">เบอร์โทรศัพท์<span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="c_phone" name="c_phone" placeholder="เบอร์โทรศัพท์">
+                                <label for="m_tel" class="text-black">เบอร์โทรศัพท์<span class="text-danger">*</span></label>
+                                <input class="form-control" type="text" id="m_tel" name="m_tel" value="<?= $user['m_tel'] ?>">
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-md-12">
                                 <label for="c_address" class="text-black">ที่อยู่<span class="text-danger">*</span></label>
-                                <textarea name="c_order_notes" id="c_order_notes" cols="30" rows="5" class="form-control" placeholder="กรุณากรอกที่อยู่ของคุณ"></textarea>
+                                <!-- <textarea name="m_address" id="m_address" cols="30" rows="5" class="form-control" placeholder="กรุณากรอกที่อยู่ของคุณ"></textarea> -->
+                                <input class="form-control" type="text" id="m_address" name="m_address" value="<?= $user['m_address'] ?>">
                             </div>
                         </div>
 
@@ -83,31 +85,55 @@ require_once('config/db.php');
                                     <label for="exampleFormControlFile1">หลักฐานการชำระเงิน</label>
                                     <input type="file" class="form-control-file" id="exampleFormControlFile1" name="Product_img" accept="image/png, image/jpg">
                                 </div>
-                                <table class="table site-block-order-table mb-5">
-                                    <thead>
-                                        <tr>
-                                            <th>สินค้า</th>
-                                            <th>ยอดชำระเงินทั้งหมด</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>ชื่อสินค้า<strong class="mx-2">x</strong> 1</td>
-                                            <td>฿250.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td>ชื่อสินค้า<strong class="mx-2">x</strong> 1</td>
-                                            <td>฿100.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-black font-weight-bold">
-                                                <strong>ยอดชำระเงินทั้งหมด</strong>
-                                            </td>
-                                            <td class="text-black font-weight-bold"><strong>฿350.00</strong>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <?php
+                                if (isset($_SESSION["cart_item"])) {
+                                    $total_quantity = 0;
+                                    $total_price = 0;
+                                ?>
+                                    <table class="table site-block-order-table mb-5">
+                                        <thead>
+                                            <tr>
+                                                <th>สินค้า</th>
+                                                <th>ยอดชำระเงินทั้งหมด</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            foreach ($_SESSION["cart_item"] as $item) {
+                                                $item_price = $item["p_qty"] * $item["p_price"];
+                                            ?>
+                                                <tr>
+
+                                                    <td><?php echo $item["p_name"]; ?><strong class="mx-2">x</strong><?php echo $item["p_qty"]; ?></td>
+                                                    <td><?php echo $item["p_qty"] * $item["p_price"]; ?></td>
+                                                </tr>
+                                            <?php
+                                                $total_quantity += $item["p_qty"];
+                                                $total_price += $item_price;
+                                            }
+                                            ?>
+                                            <tr>
+                                                <td class="text-black font-weight-bold">
+                                                    <strong>ยอดชำระเงินทั้งหมด</strong>
+                                                </td>
+                                                <td class="text-black font-weight-bold"><strong><?php echo "฿ " . number_format($total_price, 2); ?></strong>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+
+                                    </table>
+                                <?php
+                                } else {
+                                ?>
+
+                                    <div class="no-records text-center h3">ไม่พบสินค้า</div>
+
+                                <?php
+
+                                }
+
+                                ?>
 
                                 <div class="form-group">
                                     <button class="btn btn-primary btn-lg py-3 btn-block" onclick="window.location='thankyou.php'">Place Order</button>
