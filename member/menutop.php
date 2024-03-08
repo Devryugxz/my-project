@@ -6,13 +6,24 @@
 
         <ul class="nav nav-pills">
             <li class="nav-item"><a class="nav-link" href="index.php" aria-current="page">หน้าแรก</a></li>
-            <li class="nav-item"><a class="nav-link" href="../register.php" target="_blank">สมัครสมาชิก</a></li>
             <li class="nav-item"><button class="btn btn-outline-dark" type="submit">
                     <form class="d-flex">
                         <a class="nav-link" href="cart.php">
                             <i class="bi bi-basket"></i>
                             ตะกร้าสินค้า
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                            <span class="badge bg-dark text-white ms-1 rounded-pill">
+                                <?php
+                                // ตรวจสอบว่ามีตะกร้าสินค้าหรือไม่
+                                if (isset($_SESSION["cart_item"])) {
+                                    // นับจำนวนรายการทั้งหมดในตะกร้า
+                                    $cart_count = count($_SESSION["cart_item"]);
+                                    echo $cart_count;
+                                } else {
+                                    // ถ้าไม่มีรายการในตะกร้า
+                                    echo '0';
+                                }
+                                ?>
+                            </span>
                         </a>
                     </form>
                 </button>
