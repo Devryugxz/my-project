@@ -76,7 +76,7 @@ if (isset($_GET['search']) && $_GET['search'] != '') {
         </div>
     </section>
 
-<?php include('footer.php'); ?>
+    <?php include('footer.php'); ?>
     </div>
 </body>
 
