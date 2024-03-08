@@ -3,9 +3,8 @@ session_start();
 echo '<meta charset="utf-8">';
 include('config/db.php');
 
-if ($_SESSION['m_level'] != 'admin') {
-    header("Location: index.php");
-    exit();
+if($_SESSION['role']!='store_owner'){
+	Header("Location: bank.php");
 }
 
 $b_name = $_POST["b_name"];

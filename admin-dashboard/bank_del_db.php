@@ -1,8 +1,8 @@
 <?php
 session_start();
 include('config/db.php');
-if ($_SESSION['m_level'] != 'admin') {
-    Header("Location: index.php");
+if ($_SESSION['role'] != 'store_owner') {
+    Header("Location: bank.php");
 }
 
 $ID = $_GET["ID"];
