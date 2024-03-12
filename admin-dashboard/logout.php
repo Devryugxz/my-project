@@ -1,6 +1,6 @@
 <?php
 session_start();
-unset($_SESSION['store_owner']);
+unset($_SESSION['seller']);
 header("Location: ../login.php");
 exit();
 ?>
