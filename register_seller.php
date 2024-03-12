@@ -128,7 +128,7 @@ require_once('config/db.php'); // เชื่อมต่อฐานข้อ�
                                 ?>
                             </div>
                         <?php } ?>
-                        <form action="register_db.php" method="post">
+                        <form action="register_seller_db.php" method="post">
                             <div class="form-group row">
                                 <div class="col">
                                     <label for="firstname"></label>
@@ -141,8 +141,8 @@ require_once('config/db.php'); // เชื่อมต่อฐานข้อ�
                             </div>
                             <div class="form-group row">
                                 <div class="col">
-                                    <label for="m_tel"></label>
-                                    <input class="form-control" type="text" id="m_tel" name="m_tel" placeholder="เบอร์โทรศัพท์">
+                                    <label for="phone"></label>
+                                    <input class="form-control" type="text" id="phone" name="phone" placeholder="เบอร์โทรศัพท์">
                                 </div>
                                 <div class="col">
                                     <label for="email"></label>
@@ -164,11 +164,11 @@ require_once('config/db.php'); // เชื่อมต่อฐานข้อ�
                                 <input class="form-control" type="password" id="password" name="password" placeholder="รหัสผ่าน">
                             </div>
                             <div class="form-group">
-                                <label for="m_cpass"></label>
-                                <input class="form-control" type="password" id="m_cpass" name="m_cpass" placeholder="ยืนยันรหัสผ่าน">
+                                <label for="c_password"></label>
+                                <input class="form-control" type="password" id="c_password" name="c_password" placeholder="ยืนยันรหัสผ่าน">
                             </div>
-
-                            <button class="btn btn-primary btn-block mt-4" type="submit" name="register" style="width: 100%;">สมัครสมาชิก</button>
+                            <input type="hidden" name="role"  value="seller">
+                            <button class="btn btn-primary btn-block mt-4" type="submit" name="register_seller" style="width: 100%;">สมัครสมาชิก</button>
 
                         </form>
                     </div>
