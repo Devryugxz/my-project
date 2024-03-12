@@ -4,7 +4,7 @@ include('includes/navbar.php');
 
 session_start();
 require_once 'config/db.php';
-// if (!isset($_SESSION['store_owner'])) {
+// if (!isset($_SESSION['seller'])) {
 //     header("location: login.php");
 // }
 ?>
@@ -19,8 +19,8 @@ require_once 'config/db.php';
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
             <?php
 
-            if (isset($_SESSION['store_owner'])) {
-                $admin_id = $_SESSION['store_owner'];
+            if (isset($_SESSION['seller'])) {
+                $admin_id = $_SESSION['seller'];
                 $stmt = $conn->query("SELECT * FROM tb_users WHERE id = $admin_id");
                 $stmt->execute();
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);

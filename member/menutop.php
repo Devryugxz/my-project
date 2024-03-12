@@ -34,8 +34,8 @@
                 <div class="d-flex bd-highlight">
                     <?php
 
-                    if (isset($_SESSION['member'])) {
-                        $m_id = $_SESSION['member'];
+                    if (isset($_SESSION['customer'])) {
+                        $m_id = $_SESSION['customer'];
                     }
                     try {
                         $stmt = $conn->query("SELECT * FROM tb_users WHERE id = $m_id");

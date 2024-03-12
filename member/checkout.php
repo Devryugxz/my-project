@@ -3,8 +3,8 @@ session_start();
 require_once('config/db.php');
 
 // ดึงข้อมูลผู้ใช้จากฐานข้อมูล
-if (isset($_SESSION['member'])) {
-    $m_id = $_SESSION['member'];
+if (isset($_SESSION['customer'])) {
+    $m_id = $_SESSION['customer'];
     $stmt = $conn->query("SELECT * FROM tb_users WHERE id = $m_id");
     $stmt->execute();
     $user = $stmt->fetch(PDO::FETCH_ASSOC);

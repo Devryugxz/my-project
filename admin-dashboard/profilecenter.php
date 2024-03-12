@@ -5,14 +5,14 @@ include('includes/navbar.php');
 
 require_once('config/db.php');
 
-if (!isset($_SESSION['store_owner'])) {
+if (!isset($_SESSION['seller'])) {
     $_SESSION['error'] = 'กรุณาเข้าสู่ระบบ';
     header("location: login.php");
 }
 
 // ดึงข้อมูลผู้ใช้จากฐานข้อมูล
-if (isset($_SESSION['store_owner'])) {
-    $m_id = $_SESSION['store_owner'];
+if (isset($_SESSION['seller'])) {
+    $m_id = $_SESSION['seller'];
     $stmt = $conn->query("SELECT * FROM tb_users WHERE id = $m_id");
     $stmt->execute();
     $user = $stmt->fetch(PDO::FETCH_ASSOC);

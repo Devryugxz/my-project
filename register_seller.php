@@ -101,7 +101,7 @@ require_once('config/db.php'); // เชื่อมต่อฐานข้อ�
             <div class="col-md-8">
                 <div class="card">
                     <header class="card-header">
-                        <h4 class="card-title mt-2">สมัครสมาชิกลูกค้า</h4>
+                        <h4 class="card-title mt-2">สมัครสมาชิกผู้ประกอบการ</h4>
                     </header>
                     <div class="card-body">
                         <?php if (isset($_SESSION['error'])) { ?>
@@ -128,7 +128,7 @@ require_once('config/db.php'); // เชื่อมต่อฐานข้อ�
                                 ?>
                             </div>
                         <?php } ?>
-                        <form action="register_db.php" method="post">
+                        <form action="register_seller_db.php" method="post">
                             <div class="form-group row">
                                 <div class="col">
                                     <label for="firstname"></label>
@@ -149,14 +149,16 @@ require_once('config/db.php'); // เชื่อมต่อฐานข้อ�
                                     <input class="form-control" type="email" id="email" name="email" placeholder="อีเมล์">
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="username"></label>
-                                <input class="form-control" type="text" id="username" name="username" placeholder="ชื่อผู้ใช้">
+                            <div class="form-group row">
+                                <div class="col">
+                                    <label for="username"></label>
+                                    <input class="form-control" type="text" id="username" name="username" placeholder="ชื่อผู้ใช้">
+                                </div>
+                                <div class="col">
+                                    <label for="name"></label>
+                                    <input class="form-control" type="text" id="name" name="name" placeholder="ชื่อร้านค้า">
+                                </div>
                             </div>
-                            <!-- <div class="form-group mb-2">
-                                <label for="m_name"></label>
-                                <input class="form-control" type="text" id="m_name" name="m_name" placeholder="ชื่อ-สกุล">
-                            </div> -->
                             <div class="form-group">
                                 <label for="password"></label>
                                 <input class="form-control" type="password" id="password" name="password" placeholder="รหัสผ่าน">
@@ -165,25 +167,8 @@ require_once('config/db.php'); // เชื่อมต่อฐานข้อ�
                                 <label for="c_password"></label>
                                 <input class="form-control" type="password" id="c_password" name="c_password" placeholder="ยืนยันรหัสผ่าน">
                             </div>
-                            <!-- <div class="form-group mb-2">
-                                <label for="m_address"></label>
-                                <font color="red">** หมายเหตุ: กรุณากรอกที่อยู่จริง ** </font>
-                                <textarea name="m_address" class="form-control" id="m_address" placeholder="ที่อยู่"></textarea>
-                            </div> -->
-                            <!-- <div class="form-group mb-2">
-                                <label for="m_img">รูปภาพ :</label>
-                                <input type="file" name="m_img" id="card_img" class="form-control" />
-                            </div> -->
-                            <!-- <div class="form-group">
-                                <label for="role"></label>
-                                <select class="form-select" id="role" name="role">
-                                    <option value="customer">สมาชิก</option>
-                                    <option value="seller">ผู้ประกอบการ</option>
-                                    <option value="admin">admin</option>
-                                </select>
-                            </div> -->
-                            <input type="hidden" name="role"  value="customer">
-                            <button class="btn btn-primary btn-block mt-4" type="submit" name="register" style="width: 100%;">สมัครสมาชิก</button>
+                            <input type="hidden" name="role"  value="seller">
+                            <button class="btn btn-primary btn-block mt-4" type="submit" name="register_seller" style="width: 100%;">สมัครสมาชิก</button>
 
                         </form>
                     </div>
