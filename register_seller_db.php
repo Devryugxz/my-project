@@ -78,9 +78,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $stmt->bindParam(':phone', $phone);
                 $stmt->bindParam(':email', $email);
                 $stmt->bindParam(':role', $role);
-
                 // ทำการ execute statement
                 $stmt->execute();
+
+                // ดึงข้อมูล s_id ที่เพิ่มล่าสุด
+                $s_id = $conn->lastInsertId();
+
+                // เพิ่มข้อมูลในตาราง tb_masterlogin
+                $stmtlogin = $conn->prepare("INSERT INTO tb_masterlogin (username, password, email, role, s_id) VALUES (:username, :password, :email, :role, :s_id)");
+                $stmtlogin->bindParam(':username', $username);
+                $stmtlogin->bindParam(':password', $passwordHash);
+                $stmtlogin->bindParam(':email', $email);
+                $stmtlogin->bindParam(':role', $role);
+                $stmtlogin->bindParam(':s_id', $s_id);
+                $stmtlogin->execute();
+
+                // ปิดการเชื่อมต่อกับฐานข้อมูล
+                $conn = null;
 
                 $_SESSION['success'] = "สมัครสมาชิกเรียบร้อยแล้ว <a href='login.php' class='alert-link'> คลิ๊กที่นี่ </a> เพื่อเข้าสู่ระบบ";
                 header("location: register.php");

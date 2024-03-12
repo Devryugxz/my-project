@@ -40,13 +40,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['error'] = 'รหัสผ่านต้องมีความยาวอย่างน้อย 5 ตัวอักษร';
             header("location: register.php");
             exit;
-        }        
+        }
 
         if ($password != $c_password) {
             $_SESSION['error'] = 'รหัสผ่านไม่ตรงกัน';
             header("location: register.php");
             exit;
-        }      
+        }
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $_SESSION['error'] = 'รูปแบบอีเมล์ไม่ถูกต้อง';
@@ -68,17 +68,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // ทำการเข้ารหัสรหัสผ่าน
                 $passwordHash = password_hash($password, PASSWORD_DEFAULT);
                 // สร้าง statement และ bind parameters
-                $stmt = $conn->prepare("INSERT INTO tb_customer (firstname, lastname, username, password, email, phone, role) VALUES (:firstname, :lastname, :username, :password, :email, :phone, :role)");
-                $stmt->bindParam(':firstname', $firstname);
-                $stmt->bindParam(':lastname', $lastname);
-                $stmt->bindParam(':username', $username);
-                $stmt->bindParam(":password", $passwordHash);
-                $stmt->bindParam(':phone', $phone);
-                $stmt->bindParam(':email', $email);
-                $stmt->bindParam(':role', $role);
-
+                $stmtcus = $conn->prepare("INSERT INTO tb_customer (firstname, lastname, username, password, email, phone, role) VALUES (:firstname, :lastname, :username, :password, :email, :phone, :role)");
+                $stmtcus->bindParam(':firstname', $firstname);
+                $stmtcus->bindParam(':lastname', $lastname);
+                $stmtcus->bindParam(':username', $username);
+                $stmtcus->bindParam(":password", $passwordHash);
+                $stmtcus->bindParam(':phone', $phone);
+                $stmtcus->bindParam(':email', $email);
+                $stmtcus->bindParam(':role', $role);
                 // ทำการ execute statement
-                $stmt->execute();
+                $stmtcus->execute();
+
+                // ดึงข้อมูล c_id ที่เพิ่มล่าสุด
+                $c_id = $conn->lastInsertId();
+
+                // เพิ่มข้อมูลในตาราง tb_masterlogin
+                $stmtlogin = $conn->prepare("INSERT INTO tb_masterlogin (username, password, email, role, c_id) VALUES (:username, :password, :email, :role, :c_id)");
+                $stmtlogin->bindParam(':username', $username);
+                $stmtlogin->bindParam(':password', $passwordHash);
+                $stmtlogin->bindParam(':email', $email);
+                $stmtlogin->bindParam(':role', $role);
+                $stmtlogin->bindParam(':c_id', $c_id);
+                $stmtlogin->execute();
+
+                // เพิ่มข้อมูลในตาราง tb_address
+                $stmtaddress = $conn->prepare("INSERT INTO tb_address (c_id) VALUES (:c_id)");
+                $stmtaddress->bindParam(':c_id', $c_id);
+                $stmtaddress->execute();
+
+                // ปิดการเชื่อมต่อกับฐานข้อมูล
+                $conn = null;
 
                 $_SESSION['success'] = "สมัครสมาชิกเรียบร้อยแล้ว <a href='login.php' class='alert-link'> คลิ๊กที่นี่ </a> เพื่อเข้าสู่ระบบ";
                 header("location: register.php");
@@ -90,4 +109,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
-?>

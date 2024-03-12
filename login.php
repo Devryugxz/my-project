@@ -19,7 +19,7 @@ if (isset($_POST['login'])) {
     } else {
         try {
 
-            $check_data = $conn->prepare("SELECT * FROM tb_users WHERE username = :username");
+            $check_data = $conn->prepare("SELECT * FROM tb_masterlogin WHERE username = :username");
             $check_data->bindParam(':username', $username);
             $check_data->execute();
             $row = $check_data->fetch(PDO::FETCH_ASSOC);
@@ -28,13 +28,13 @@ if (isset($_POST['login'])) {
                 if ($username == $row['username'] && password_verify($password, $row['password'])) {
                     // ตรวจสอบระดับของผู้ใช้และเปลี่ยนเส้นทางไปยังหน้าที่เหมาะสม
                     if ($row['role'] == 'admin') {
-                        $_SESSION['admin'] = $row['id'];
+                        $_SESSION['admin'] = $row['master_id'];
                         header("location: admin/index.php");
-                    } else if ($row['role'] == 'store_owner') {
-                        $_SESSION['seller'] = $row['id'];
+                    } else if ($row['role'] == 'seller') {
+                        $_SESSION['seller'] = $row['master_id'];
                         header("location: admin-dashboard/index.php");
                     } else {
-                        $_SESSION['customer'] = $row['id'];
+                        $_SESSION['customer'] = $row['master_id'];
                         header("location: member/index.php");
                     }
                 } else {
