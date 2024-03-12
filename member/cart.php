@@ -38,9 +38,9 @@ if (!empty($_GET['action'])) {
         }
       }
       break;
-      case "empty":
-        unset($_SESSION["cart_item"]);
-        break;
+    case "empty":
+      unset($_SESSION["cart_item"]);
+      break;
   }
 }
 
@@ -75,9 +75,9 @@ if (isset($_POST['update_cart'])) {
               $total_quantity = 0;
               $total_price = 0;
             ?>
-            <div style="text-align: end;">
-              <a href=" cart.php?action=empty" id="btnEmpty">ลบทั้งหมด</a>
-            </div>
+              <div style="text-align: end;">
+                <a href=" cart.php?action=empty" id="btnEmpty">ลบทั้งหมด</a>
+              </div>
               <table class="table table-bordered">
                 <thead>
                   <tr>
@@ -98,7 +98,7 @@ if (isset($_POST['update_cart'])) {
                   ?>
                     <tr>
                       <td class="product-thumbnail">
-                        <img src="<?php echo $item["p_img"]; ?>" class="img-fluid">
+                        <img src="../p_img/<?php echo $item["p_img"]; ?>" width="150px" height="200px" class="img-fluid">
                       </td>
                       <td class="product-name">
                         <h2 class="h5 text-black"><?php echo $item["p_name"]; ?></h2>
@@ -106,7 +106,9 @@ if (isset($_POST['update_cart'])) {
                       <td class="product-price"><?php echo "฿ " . $item["p_price"]; ?></td>
                       <td class="product-quantity">
                         <div class="input-group mb-3" style="max-width: 120px;">
-                          <?php echo $item["p_qty"]; ?>
+                          <?php
+                          echo "<input type='text' name='amount[$p_id]' value='$p_qty' size='2'/></td>";
+                          ?>
                         </div>
                       </td>
                       <td class="product-total"><?php echo "฿ " . $item_price; ?></td>
@@ -124,7 +126,7 @@ if (isset($_POST['update_cart'])) {
                 </tbody>
               </table>
 
-            
+
 
           </div>
         </form>
@@ -186,17 +188,17 @@ if (isset($_POST['update_cart'])) {
             </div>
           </div>
         </div>
-        <?php
+      <?php
             } else {
-            ?>
+      ?>
 
-              <div class="no-records text-center h3">ไม่พบสินค้า</div>
+        <div class="no-records text-center h3">ไม่พบสินค้า</div>
 
-            <?php
+      <?php
 
             }
 
-            ?>
+      ?>
       </div>
     </div>
   </div>

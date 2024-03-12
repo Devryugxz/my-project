@@ -84,7 +84,7 @@ $p_id = $_GET["id"];
                                 <input class="form-control text-center me-3" id="inputQuantity" name="p_qty" type="text" value="1" style="max-width: 3rem" />
                                 คงเหลือ <font color=""> <?php echo $row["p_qty"]; ?> <?php echo $row["p_unit"]; ?> </font>
                             </div>
-                            <input type="submit" value="เพิ่มลงตะกร้า" class="btnAddAction">
+                            <input class="btn btn-warning" type="submit" value="เพิ่มลงตะกร้า" class="btnAddAction">
                         </div>
                     </div>
                 </form>

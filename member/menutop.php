@@ -50,7 +50,7 @@
 
                     <div class="d-flex bd-highlight mx-4" style="align-items: center;">
                         <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="<?php echo $m_img ?>" alt="" width="32" height="32" class="rounded-circle">
+                            <img src="../m_img/<?php echo $m_img ?>" alt="" width="32" height="32" class="rounded-circle">
                             <?php echo $userData['username'] ?>
                         </a>
                         <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
