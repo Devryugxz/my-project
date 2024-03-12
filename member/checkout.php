@@ -4,8 +4,8 @@ require_once('config/db.php');
 
 // ดึงข้อมูลผู้ใช้จากฐานข้อมูล
 if (isset($_SESSION['customer'])) {
-    $m_id = $_SESSION['customer'];
-    $stmt = $conn->query("SELECT * FROM tb_users WHERE id = $m_id");
+    $c_id = $_SESSION['customer'];
+    $stmt = $conn->query("SELECT * FROM tb_customer WHERE c_id = $c_id");
     $stmt->execute();
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 }
@@ -28,12 +28,16 @@ if (isset($_SESSION['customer'])) {
                     <div class="p-3 p-lg-5 border">
                         <div class="form-group row">
                             <div class="col-md-6">
-                                <label for="m_name" class="text-black">ชื่อ-สกุล<span class="text-danger">*</span></label>
-                                <input class="form-control" type="text" id="m_name" name="m_name" value="<?= $user['m_name'] ?>">
+                                <label for="firstname" class="text-black">ชื่อ<span class="text-danger">*</span></label>
+                                <input class="form-control" type="text" id="firstname" name="firstname" value="<?= $user['firstname'] ?>">
                             </div>
                             <div class="col-md-6">
-                                <label for="m_tel" class="text-black">เบอร์โทรศัพท์<span class="text-danger">*</span></label>
-                                <input class="form-control" type="text" id="m_tel" name="m_tel" value="<?= $user['m_tel'] ?>">
+                                <label for="lastname" class="text-black">นามสกุล<span class="text-danger">*</span></label>
+                                <input class="form-control" type="text" id="lastname" name="lastname" value="<?= $user['lastname'] ?>">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="phone" class="text-black">เบอร์โทรศัพท์<span class="text-danger">*</span></label>
+                                <input class="form-control" type="text" id="phone" name="phone" value="<?= $user['phone'] ?>">
                             </div>
                         </div>
                         <div class="form-group row">

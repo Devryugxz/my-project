@@ -35,13 +35,13 @@
                     <?php
 
                     if (isset($_SESSION['customer'])) {
-                        $m_id = $_SESSION['customer'];
+                        $c_id = $_SESSION['customer'];
                     }
                     try {
-                        $stmt = $conn->query("SELECT * FROM tb_users WHERE id = $m_id");
+                        $stmt = $conn->query("SELECT * FROM tb_customer WHERE c_id = $c_id");
                         $stmt->execute();
                         $userData = $stmt->fetch(PDO::FETCH_ASSOC);
-                        $m_img = $userData['m_img'];
+                        // $m_img = $userData['m_img'];
                     } catch (PDOException $e) {
                         echo "error: " . $e->getMessage();
                     }
@@ -51,7 +51,7 @@
                     <div class="d-flex bd-highlight mx-4" style="align-items: center;">
                         <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="<?php echo $m_img ?>" alt="" width="32" height="32" class="rounded-circle">
-                            <?php echo $userData['m_name'] ?>
+                            <?php echo $userData['username'] ?>
                         </a>
                         <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
                             <li><a class="dropdown-item" href="profile.php">โปรไฟล์</a></li>
