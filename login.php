@@ -31,10 +31,10 @@ if (isset($_POST['login'])) {
                         $_SESSION['admin'] = $row['id'];
                         header("location: admin/index.php");
                     } else if ($row['role'] == 'store_owner') {
-                        $_SESSION['store_owner'] = $row['id'];
+                        $_SESSION['seller'] = $row['id'];
                         header("location: admin-dashboard/index.php");
                     } else {
-                        $_SESSION['member'] = $row['id'];
+                        $_SESSION['customer'] = $row['id'];
                         header("location: member/index.php");
                     }
                 } else {
@@ -252,7 +252,7 @@ if (isset($_POST['login'])) {
                                     </form>
                                     <div class="login-form-footer">
                                         <div>ยังไม่ได้เป็นสมาชิก?
-                                            <a href="register.php">สมัครสมาชิก</a>
+                                            <a href="register_home.php">สมัครสมาชิก</a>
                                         </div>
                                     </div>
                                 </div>
