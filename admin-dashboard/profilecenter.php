@@ -12,8 +12,8 @@ if (!isset($_SESSION['seller'])) {
 
 // ดึงข้อมูลผู้ใช้จากฐานข้อมูล
 if (isset($_SESSION['seller'])) {
-    $m_id = $_SESSION['seller'];
-    $stmt = $conn->query("SELECT * FROM tb_users WHERE id = $m_id");
+    $s_id = $_SESSION['seller'];
+    $stmt = $conn->query("SELECT * FROM tb_seller WHERE s_id = $s_id");
     $stmt->execute();
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 }
@@ -22,19 +22,23 @@ if (isset($_SESSION['seller'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // ดึงข้อมูลที่แก้ไขจากฟอร์ม
     $new_username = isset($_POST['username']) ? htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8') : $user['username'];
+    $new_fisrtname = isset($_POST['fisrtname']) ? htmlspecialchars($_POST['fisrtname'], ENT_QUOTES, 'UTF-8') : $user['fisrtname'];
+    $new_lastname = isset($_POST['lastname']) ? htmlspecialchars($_POST['lastname'], ENT_QUOTES, 'UTF-8') : $user['lastname'];
     $new_email = isset($_POST['email']) ? htmlspecialchars($_POST['email'], ENT_QUOTES, 'UTF-8') : $user['email'];
-    $new_name = isset($_POST['m_name']) ? htmlspecialchars($_POST['m_name'], ENT_QUOTES, 'UTF-8') : $user['m_name'];
-    $new_tel = isset($_POST['m_tel']) ? htmlspecialchars($_POST['m_tel'], ENT_QUOTES, 'UTF-8') : $user['m_tel'];
-    $new_address = isset($_POST['m_address']) ? htmlspecialchars($_POST['m_address'], ENT_QUOTES, 'UTF-8') : $user['m_address'];
+    $new_name = isset($_POST['name']) ? htmlspecialchars($_POST['name'], ENT_QUOTES, 'UTF-8') : $user['name'];
+    $new_tel = isset($_POST['phone']) ? htmlspecialchars($_POST['phone'], ENT_QUOTES, 'UTF-8') : $user['phone'];
+    // $new_address = isset($_POST['address']) ? htmlspecialchars($_POST['address'], ENT_QUOTES, 'UTF-8') : $user['address'];
 
     // ปรับปรุงข้อมูลในฐานข้อมูล
-    $update_stmt = $conn->prepare("UPDATE tb_users SET username = :username, email = :email, m_name = :m_name, m_tel = :m_tel, m_address = :m_address WHERE id = :id");
+    $update_stmt = $conn->prepare("UPDATE tb_seller SET username = :username, email = :email, name = :name, phone = :phone, address = :address WHERE s_id = :s_id");
     $update_stmt->bindParam(':username', $new_username);
+    $update_stmt->bindParam(':firstname', $new_firstname);
+    $update_stmt->bindParam(':lastname', $new_lastname);
     $update_stmt->bindParam(':email', $new_email);
-    $update_stmt->bindParam(':m_name', $new_name);
-    $update_stmt->bindParam(':m_tel', $new_tel);
-    $update_stmt->bindParam(':m_address', $new_address);
-    $update_stmt->bindParam(':id', $m_id);
+    $update_stmt->bindParam(':name', $new_name);
+    $update_stmt->bindParam(':phone', $new_tel);
+    // $update_stmt->bindParam(':address', $new_address);
+    $update_stmt->bindParam(':s_id', $s_id);
 
     if ($update_stmt->execute()) {
         echo "ข้อมูลถูกปรับปรุงเรียบร้อยแล้ว";
@@ -157,8 +161,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             </div>
                                             <!-- Form Group (store name)-->
                                             <div class="col-md-6 mb-3">
-                                                <label class="small mb-1" for="">ชื่อ-นามสกุล</label>
-                                                <input class="form-control" type="text" id="m_name" name="m_name" value="<?= $user['m_name'] ?>">
+                                                <label class="small mb-1" for="">ชื่อร้าน</label>
+                                                <input class="form-control" type="text" id="name" name="name" value="<?= $user['name'] ?>">
+                                            </div>
+                                            <!-- Form Group (first name)-->
+                                            <div class="col-md-6 mb-3">
+                                                <label class="small mb-1" for="">ชื่อ</label>
+                                                <input class="form-control" type="text" id="firstname" name="firstname" value="<?= $user['firstname'] ?>">
+                                            </div>
+                                            <!-- Form Group (last name)-->
+                                            <div class="col-md-6 mb-3">
+                                                <label class="small mb-1" for="">นามสกุล</label>
+                                                <input class="form-control" type="text" id="lastname" name="lastname" value="<?= $user['lastname'] ?>">
                                             </div>
                                             <!-- Form Group (email address)-->
                                             <div class="col-md-6 mb-3">
@@ -168,13 +182,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             <!-- Form Group (phone number)-->
                                             <div class="col-md-6 mb-3">
                                                 <label class="small mb-1" for="inputPhone">เบอร์โทรศัพท์</label>
-                                                <input class="form-control" type="text" id="m_tel" name="m_tel" value="<?= $user['m_tel'] ?>">
+                                                <input class="form-control" type="text" id="phone" name="phone" value="<?= $user['phone'] ?>">
                                             </div>
                                             <!-- Form Group (address)-->
-                                            <div class="col-md-6">
+                                            <!-- <div class="col-md-6">
                                                 <label class="small mb-1" for="">ที่อยู่</label>
-                                                <textarea class="form-control" id="m_address" name="m_address"><?= $user['m_address'] ?></textarea>
-                                            </div>
+                                                <textarea class="form-control" id="address" name="address"><?= $user['address'] ?></textarea>
+                                            </div> -->
 
                                         </div>
                                         <button type="submit" class="btn btn-primary mb-3">บันทึกข้อมูล</button>

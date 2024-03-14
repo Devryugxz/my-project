@@ -281,7 +281,7 @@ if (isset($_SESSION['c_id'])) {
                                     echo "Error: " . $e->getMessage();
                                 }
 
-                                foreach ($_SESSION['cart'] as $p_id => $p_qty) {
+                                foreach ($_SESSION['cart_item'] as $p_id => $p_qty) {
                                     try {
                                         $stmt = $conn->prepare("SELECT * FROM tb_product as p
                                          inner join tb_seller as s
@@ -319,7 +319,7 @@ if (isset($_SESSION['c_id'])) {
                                     }
 
                                     try {
-                                        $stmt = $conn->prepare("SELECT * FROM  tb_promotion as pro
+                                        $stmt = $conn->prepare("SELECT * FROM tb_promotion as pro
                                                 inner join tb_product as p
                                                 on pro.pro_id = p.id 
                                                 WHERE pro_id=:p_id ");

@@ -31,6 +31,10 @@ if ($act == 'update') {
     }
   }
 }
+
+if ($act == 'emtpy') {
+  unset($_SESSION['cart_item']);
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -298,7 +302,7 @@ if ($act == 'update') {
                   ?></span></div>
               <!-- <div class="summary-item"><span class="text">Discount</span><span class="price">$0</span></div> -->
               <div class="summary-item mt-3"><span class="text">ยอดชำระเงินทั้งหมด</span><span class="price"><?php echo "฿ " . number_format($total, 2); ?></span></div>
-              <button type="submit" class="btn btn-primary btn-lg btn-block" onclick="window.location='confirm.php'">ดำเนินการชำระเงิน</button>
+              <button type="submit" class="btn btn-primary btn-lg btn-block w-100" onclick="window.location='confirm.php'">ดำเนินการชำระเงิน</button>
             </div>
           </div>
         </div>
