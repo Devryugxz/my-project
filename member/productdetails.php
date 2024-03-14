@@ -2,8 +2,19 @@
 session_start();
 require_once('config/db.php');
 
-$p_id = $_GET["id"];
+$p_id = isset($_GET['id']) ? $_GET['id'] : "";
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $p_qty = isset($_POST['amount']) ? intval($_POST['amount']) : 1; // แปลงค่าเป็นจำนวนเต็ม
+
+    if ($p_qty < 1) {
+        $p_qty = 1; // ถ้ามีค่าน้อยกว่า 1 ให้กำหนดให้เป็น 1
+    }
+
+    $_SESSION['cart_item'][$p_id] = $p_qty; // เก็บจำนวนสินค้าในตะกร้า
+}
 ?>
+
 
 <!DOCTYPE html>
 
@@ -64,7 +75,7 @@ $p_id = $_GET["id"];
         <!-- Product section-->
         <section class="py-5">
             <div class="container px-4 px-lg-5 my-5">
-                <form action="cart.php?action=add&p_id=<?php echo $row['p_id']; ?>" method="post">
+                <form action="cart.php?act=add&p_id=<?php echo $row['p_id']; ?>" method="post">
                     <div class="row gx-4 gx-lg-5 align-items-center">
                         <div class="col-md-6 item" id='ex1'>
                             <a class="card-img-top mb-5 mb-md-0"><?php echo "<img src='../p_img/" . $row['p_img'] . "'width='100%'>"; ?></a>
@@ -81,10 +92,11 @@ $p_id = $_GET["id"];
                             <p><?php echo $row["type_name"]; ?></p>
 
                             <div class="d-flex">
-                                <input class="form-control text-center me-3" id="inputQuantity" name="p_qty" type="text" value="1" style="max-width: 3rem" />
+                                <!-- <input class="form-control text-center me-3" id="inputQuantity" name="amount" type="text" value="1" style="max-width: 10rem" /> -->
                                 คงเหลือ <font color=""> <?php echo $row["p_qty"]; ?> <?php echo $row["p_unit"]; ?> </font>
                             </div>
-                            <input class="btn btn-warning" type="submit" value="เพิ่มลงตะกร้า" class="btnAddAction">
+                            <input class="btn btn-success mt-3" type="submit" value="เพิ่มลงตะกร้า" class="btnAddAction">
+
                         </div>
                     </div>
                 </form>
