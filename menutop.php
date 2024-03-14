@@ -6,8 +6,8 @@
 
         <ul class="nav nav-pills">
             <li class="nav-item"><a class="nav-link" href="index.php"  aria-current="page">หน้าแรก</a></li>
-            <li class="nav-item"><a class="nav-link" href="register.php" target="_blank">สมัครสมาชิก</a></li>
-            <li class="nav-item"><a class="nav-link" href="login.php" target="_blank">เข้าสู่ระบบ</a></li>
+            <li class="nav-item"><a class="nav-link" href="register_home.php" target="">สมัครสมาชิก</a></li>
+            <li class="nav-item"><a class="nav-link" href="login.php" target="">เข้าสู่ระบบ</a></li>
             <li class="nav-item"><a class="nav-link" href="login.php"><i class="bi bi-basket"></i>ตะกร้าสินค้า<span class="badge bg-dark text-white ms-1 rounded-pill">0</span></a></li>
         </ul>
     </header>

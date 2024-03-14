@@ -1,7 +1,7 @@
 <?php
 session_start();
 include('config/db.php');
-if ($_SESSION['role'] != 'store_owner') {
+if ($_SESSION['role'] != 'seller') {
     Header("Location: bank.php");
 }
 

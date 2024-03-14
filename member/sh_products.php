@@ -3,7 +3,7 @@ session_start();
 
 require_once('config/db.php');
 
-if (!isset($_SESSION['member'])) {
+if (!isset($_SESSION['customer'])) {
     header("location: login.php");
 }
 
@@ -41,8 +41,8 @@ if (isset($_GET['search']) && $_GET['search'] != '') {
                 <div class="d-flex bd-highlight">
                     <?php
 
-                    if (isset($_SESSION['member'])) {
-                        $user_id = $_SESSION['member'];
+                    if (isset($_SESSION['customer'])) {
+                        $user_id = $_SESSION['customer'];
                         $stmt = $conn->query("SELECT * FROM tb_users WHERE id = $user_id");
                         $stmt->execute();
                         $row = $stmt->fetch(PDO::FETCH_ASSOC);

@@ -1,8 +1,8 @@
 <?php
 
 try {
-    $pdo = new PDO("mysql:host=localhost;dbname=mango_distribution_db", "root", "");
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $conn = new PDO("mysql:host=localhost;dbname=mango_distribution_db", "root", "");
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     if (@$_GET['do'] == 'success') {
         echo "<script type='text/javascript'>
@@ -27,7 +27,7 @@ try {
     }
 
     $query = "SELECT * FROM tb_type ORDER BY type_id DESC";
-    $stmt = $pdo->query($query);
+    $stmt = $conn->query($query);
 
     echo ' <table id="example1" class="table table-bordered table-striped">';
     echo "<thead>";

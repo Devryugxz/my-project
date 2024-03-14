@@ -3,8 +3,8 @@ session_start();
 echo '<meta charset="utf-8">';
 include('config/db.php');
 
-if ($_SESSION['m_level'] != 'admin') {
-    header("Location: index.php");
+if ($_SESSION['role'] != 'seller') {
+    header("Location: type.php");
 }
 
 $ID = htmlspecialchars($_GET["ID"]);

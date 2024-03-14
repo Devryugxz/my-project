@@ -19,7 +19,7 @@ if (isset($_POST['login'])) {
     } else {
         try {
 
-            $check_data = $conn->prepare("SELECT * FROM tb_users WHERE username = :username");
+            $check_data = $conn->prepare("SELECT * FROM tb_masterlogin WHERE username = :username");
             $check_data->bindParam(':username', $username);
             $check_data->execute();
             $row = $check_data->fetch(PDO::FETCH_ASSOC);
@@ -28,13 +28,13 @@ if (isset($_POST['login'])) {
                 if ($username == $row['username'] && password_verify($password, $row['password'])) {
                     // ตรวจสอบระดับของผู้ใช้และเปลี่ยนเส้นทางไปยังหน้าที่เหมาะสม
                     if ($row['role'] == 'admin') {
-                        $_SESSION['admin'] = $row['id'];
+                        $_SESSION['admin'] = $row['master_id'];
                         header("location: admin/index.php");
-                    } else if ($row['role'] == 'store_owner') {
-                        $_SESSION['store_owner'] = $row['id'];
+                    } else if ($row['role'] == 'seller') {
+                        $_SESSION['seller'] = $row['master_id'];
                         header("location: admin-dashboard/index.php");
                     } else {
-                        $_SESSION['member'] = $row['id'];
+                        $_SESSION['customer'] = $row['master_id'];
                         header("location: member/index.php");
                     }
                 } else {
@@ -113,84 +113,6 @@ if (isset($_POST['login'])) {
             z-index: 99999;
             width: 100%;
         }
-
-        .container {
-            display: flex;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .login {
-            width: 50%;
-            margin-top: 80px;
-            border: 1px solid #dedede !important;
-            border-radius: 8px;
-            padding: 50px;
-        }
-
-        .login-header {
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .login-header h1 {
-            font-size: 40px;
-            margin-bottom: 10px;
-        }
-
-        .login-header p {
-            opacity: .7;
-        }
-
-        .login-form-content {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .login-form-footer {
-            display: flex;
-            gap: 30px;
-            margin-top: 30px;
-        }
-
-        .login-form-footer a {
-            color: #fe6d43;
-        }
-
-        .login-form-footer a:hover {
-            text-decoration: underline;
-        }
-
-        input[type='text'],
-        input[type='password'] {
-            border: 1px solid #dedede;
-            height: 45px;
-            padding: 0 1rem;
-            width: 100%;
-            outline: none;
-            font-size: 14px;
-            border-radius: 10px;
-        }
-
-        input:hover {
-            border: 1px solid #fe6d43;
-            box-shadow: 0 0 5px #fe6d43;
-        }
-
-        button {
-            border: none;
-            background-color: #fe6d43;
-            color: white;
-            border-radius: 10px;
-            text-align: center;
-            font-size: 18px;
-            height: 45px;
-            margin-top: 35px;
-        }
-
-        button:hover {
-            background-color: #ff8360;
-        }
     </style>
 </head>
 
@@ -239,20 +161,20 @@ if (isset($_POST['login'])) {
                                     </div>
                                     <form action="login.php" method="post">
                                         <div class="login-form-content">
-                                            <div class="form-item">
+                                            <div class="form-group">
                                                 <label for="username"></label>
-                                                <input type="text" id="username" name="username" placeholder="ชื่อผู้ใช้">
+                                                <input class="form-control" type="text" id="username" name="username" placeholder="ชื่อผู้ใช้">
                                             </div>
-                                            <div class="form-item">
+                                            <div class="form-group">
                                                 <label for="password"></label>
-                                                <input type="password" id="password" name="password" placeholder="รหัสผ่าน">
+                                                <input class="form-control" type="password" id="password" name="password" placeholder="รหัสผ่าน">
                                             </div>
-                                            <button type="submit" name="login">เข้าสู่ระบบ</button>
+                                            <button class="btn btn-primary btn-block mt-4" type="submit" name="login">เข้าสู่ระบบ</button>
                                         </div>
                                     </form>
-                                    <div class="login-form-footer">
+                                    <div class="mt-2">
                                         <div>ยังไม่ได้เป็นสมาชิก?
-                                            <a href="register.php">สมัครสมาชิก</a>
+                                            <a href="register_home.php">สมัครสมาชิก</a>
                                         </div>
                                     </div>
                                 </div>

@@ -3,7 +3,7 @@ session_start();
 
 require_once('config/db.php');
 
-if (!isset($_SESSION['member'])) {
+if (!isset($_SESSION['customer'])) {
     $_SESSION['error'] = 'กรุณาเข้าสู่ระบบ';
     header("location: login.php");
 }

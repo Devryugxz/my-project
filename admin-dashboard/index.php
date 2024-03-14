@@ -5,7 +5,7 @@ include('includes/navbar.php');
 session_start();
 require_once 'config/db.php';
 
-if (!isset($_SESSION['store_owner'])) {
+if (!isset($_SESSION['seller'])) {
     $_SESSION['error'] = 'กรุณาเข้าสู่ระบบ';
     header("location: ../login.php");
 }
@@ -21,9 +21,9 @@ if (!isset($_SESSION['store_owner'])) {
 
             <?php
 
-            if (isset($_SESSION['store_owner'])) {
-                $admin_dashboard_id = $_SESSION['store_owner'];
-                $stmt = $conn->query("SELECT * FROM tb_users WHERE id = $admin_dashboard_id");
+            if (isset($_SESSION['seller'])) {
+                $s_id = $_SESSION['seller'];
+                $stmt = $conn->query("SELECT * FROM tb_seller WHERE s_id = $s_id");
                 $stmt->execute();
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
             }
