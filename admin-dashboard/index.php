@@ -22,8 +22,8 @@ if (!isset($_SESSION['seller'])) {
             <?php
 
             if (isset($_SESSION['seller'])) {
-                $admin_dashboard_id = $_SESSION['seller'];
-                $stmt = $conn->query("SELECT * FROM tb_users WHERE id = $admin_dashboard_id");
+                $s_id = $_SESSION['seller'];
+                $stmt = $conn->query("SELECT * FROM tb_seller WHERE s_id = $s_id");
                 $stmt->execute();
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
             }
