@@ -2,8 +2,8 @@
 session_start();
 echo '<meta charset="utf-8">';
 include('config/db.php');
-if ($_SESSION['m_level'] != 'admin') {
-    Header("Location: index.php");
+if ($_SESSION['role'] != 'seller') {
+    Header("Location: product.php");
 }
 
 $ID = $_GET["ID"];

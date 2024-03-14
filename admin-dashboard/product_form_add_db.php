@@ -3,8 +3,8 @@ session_start();
 echo '<meta charset="utf-8">';
 include('config/db.php');
 
-if ($_SESSION['m_level'] != 'admin') {
-    Header("Location: index.php");
+if ($_SESSION['role'] != 'seller') {
+    Header("Location: product.php");
 }
 
 $p_name = $_POST["p_name"];
@@ -34,9 +34,9 @@ if ($upload != '' && in_array(strtolower(pathinfo($upload, PATHINFO_EXTENSION)),
 
 // Use prepared statements to prevent SQL injection
 $sql = "INSERT INTO tb_product
-    (p_name, type_id, p_detail, p_price, p_qty, p_unit, p_img, store_owner_id)
+    (p_name, type_id, p_detail, p_price, p_qty, p_unit, p_img)
     VALUES
-    (:p_name, :type_id, :p_detail, :p_price, :p_qty, :p_unit, :newname, :store_owner_id)";
+    (:p_name, :type_id, :p_detail, :p_price, :p_qty, :p_unit, :newname)";
 
 $statement = $conn->prepare($sql);
 $statement->bindParam(':p_name', $p_name);
@@ -46,7 +46,6 @@ $statement->bindParam(':p_price', $p_price);
 $statement->bindParam(':p_qty', $p_qty);
 $statement->bindParam(':p_unit', $p_unit);
 $statement->bindParam(':newname', $newname);
-$statement->bindParam(':store_owner_id', $_SESSION['admin-dashboard_login']); // นำ ID ของผู้ขายจาก Session มาใส่
 
 $result = $statement->execute();
 

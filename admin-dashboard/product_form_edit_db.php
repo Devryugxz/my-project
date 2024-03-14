@@ -6,8 +6,8 @@ include('config/db.php');
 // print_r($_POST);
 // echo "</pre>";
 // exit();
-if ($_SESSION['m_level'] != 'admin') {
-    Header("Location: index.php");
+if ($_SESSION['role'] != 'seller') {
+    Header("Location: product.php");
 }
 
 $p_id = $_POST["p_id"];
