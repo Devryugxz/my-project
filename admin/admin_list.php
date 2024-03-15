@@ -38,7 +38,7 @@ require_once 'config\db.php';
                 </tfoot>
                 <tbody>
                     <?php
-                    $select_stmt = $conn->prepare("SELECT * FROM tb_users");
+                    $select_stmt = $conn->prepare("SELECT * FROM tb_masterlogin");
                     $select_stmt->execute();
 
                     $users = $select_stmt->fetchAll();
@@ -46,8 +46,10 @@ require_once 'config\db.php';
                     foreach ($users as $user) {
                     ?>
                         <tr>
-                            <td class="sorting_1"><?php echo $user['id']; ?></td>
-                            <td><img src="<?php echo $row['m_img']; ?>" class="img-rounded" width="200px"></td>
+                            <td class="sorting_1"><?php echo $user['master_id']; ?></td>
+                            <td>
+                                <!-- <img src="<?php echo $row['m_img']; ?>" class="img-rounded" width="200px"> -->
+                            </td>
                             <td><?php echo $user['username']; ?></td>
                             <td><?php echo $user['role']; ?></td>
                             <td><?php echo $user['m_name']; ?></td>
@@ -55,8 +57,8 @@ require_once 'config\db.php';
                             <td><?php echo $user['m_tel']; ?></td>
                             <td><?php echo $user['m_address']; ?></td>
                             <td><?php echo $user['created_at']; ?></td>
-                            <td><a href="admin_form_edit.php?update_id=<?php echo $user['id']; ?>" class="btn btn-warning">แก้ไข</a></td>
-                            <td><a href="?delete_id=<?php echo $user['id']; ?>" class="btn btn-danger" onclick="return confirm('กรุณายืนยันการลบข้อมูล');">ลบ</a>
+                            <td><a href="admin_form_edit.php?update_id=<?php echo $user['master_id']; ?>" class="btn btn-warning"><i class="fas fa-times"></i></a></td>
+                            <td><a href="?delete_id=<?php echo $user['master_id']; ?>" class="btn btn-danger" onclick="return confirm('กรุณายืนยันการลบข้อมูล');"><i class="fas fa-trash-alt"></i></a>
                             </td>
                         </tr>
                     <?php

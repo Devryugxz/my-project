@@ -51,10 +51,9 @@ try {
         echo "<td class='hidden-xs'>" . $row["b_name"] . "</td> ";
         echo "<td class='hidden-xs'>" . $row["b_number"] . "</td> ";
         echo "<td>" . $row["b_owner"] . "</td> ";
-        echo "<td><a href='bank.php?act=edit&ID=$row[b_id]' class='btn btn-warning btn-sm'><span class='fa fa-edit'></span></a></td>";
-        echo "<td>
-              <a href='bank_del_db.php?ID=$row[b_id]' onclick=\"return confirm('ยันยันการลบ')\" class='btn btn-danger btn-sm'><span class='fas fa-trash-alt'></span></a></td>";
-        echo "</tr>";
+        echo "<td><a href='bank.php?act=edit&ID=$row[b_id]' class='btn btn-warning btn-xs'><span class='fas fa-edit'></span></a>   
+              <a href='bank_del_db.php?ID=$row[b_id]' onclick=\"return confirm('ยันยันการลบ')\" class='btn btn-danger btn-xs'><span class='fas fa-trash-alt'></span></a>
+        </td> ";
     }
 
     echo "</table>";

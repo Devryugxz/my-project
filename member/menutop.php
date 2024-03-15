@@ -54,7 +54,7 @@
                             <?php echo $userData['username'] ?>
                         </a>
                         <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-                            <li><a class="dropdown-item" href="profile.php">บัญชีของฉัน</a></li>
+                            <li><a class="dropdown-item" href="profile.php">ข้อมูลส่วนตัว</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
