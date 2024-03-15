@@ -1,6 +1,6 @@
 <?php
-include('includes/header.php');
-include('includes/navbar.php');
+    include('includes/header.php'); 
+    include('includes/navbar.php'); 
 ?>
 
 <!-- Content Wrapper -->
@@ -20,7 +20,8 @@ include('includes/navbar.php');
             <!-- Topbar Search -->
             <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                 <div class="input-group">
-                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                        aria-label="Search" aria-describedby="basic-addon2">
                     <div class="input-group-append">
                         <button class="btn btn-primary" type="button">
                             <i class="fas fa-search fa-sm"></i>
@@ -34,14 +35,17 @@ include('includes/navbar.php');
 
                 <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                 <li class="nav-item dropdown no-arrow d-sm-none">
-                    <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-search fa-fw"></i>
                     </a>
                     <!-- Dropdown - Messages -->
-                    <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                    <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                        aria-labelledby="searchDropdown">
                         <form class="form-inline mr-auto w-100 navbar-search">
                             <div class="input-group">
-                                <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                                <input type="text" class="form-control bg-light border-0 small"
+                                    placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                                 <div class="input-group-append">
                                     <button class="btn btn-primary" type="button">
                                         <i class="fas fa-search fa-sm"></i>
@@ -56,12 +60,14 @@ include('includes/navbar.php');
 
                 <!-- Nav Item - User Information -->
                 <li class="nav-item dropdown no-arrow">
-                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
                         <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin</span>
                         <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                     </a>
                     <!-- Dropdown - User Information -->
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                        aria-labelledby="userDropdown">
                         <a class="dropdown-item" href="profilecenter.php">
                             <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                             Profile
@@ -84,7 +90,8 @@ include('includes/navbar.php');
 
             <!-- Page Heading -->
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">บัญชีธนาคาร<a href="bank.php?act=add" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> เพิ่มบัญชีใหม่</a></h1>
+                <h1 class="h3 mb-0 text-gray-800">บัญชีธนาคาร<a href="bank.php?act=add"
+                        class="btn btn-primary btn-sm">เพิ่มบัญชีใหม่</a></h1>
             </div>
 
 
@@ -95,20 +102,18 @@ include('includes/navbar.php');
                         <div class="col-lg-6">
                             <!-- Account details card-->
                             <div class="card mb-4">
-                            <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">บัญชีธนาคาร</h6>
-                        </div>
+                                <div class="card-header">บัญชีธนาคาร</div>
                                 <div class="card-body">
-                                    <?php
-                                    $act = (isset($_GET['act']) ? $_GET['act'] : '');
-                                    if ($act == 'add') {
-                                        include('bank_form_add.php');
-                                    } elseif ($act == 'edit') {
-                                        include('bank_form_edit.php');
-                                    } else {
-                                        include('bank_list.php');
-                                    }
-                                    ?>
+                                <?php
+                  $act = (isset($_GET['act']) ? $_GET['act'] : '');
+                  if($act == 'add'){
+                include('bank_form_add.php');
+                }elseif ($act == 'edit') {
+                include('bank_form_edit.php');     
+                }else {
+                include('bank_list.php');
+                }
+                  ?>
                                 </div>
                             </div>
 
@@ -124,6 +129,6 @@ include('includes/navbar.php');
     <!-- End of Page Wrapper -->
 
     <?php
-    include('includes/scripts.php');
-    include('includes/footer.php');
-    ?>
+    include('includes/scripts.php'); 
+    include('includes/footer.php'); 
+?>

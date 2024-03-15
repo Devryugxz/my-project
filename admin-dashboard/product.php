@@ -55,7 +55,7 @@ require_once 'config/db.php';
 
             <!-- Page Heading -->
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">จัดการข้อมูล<a href="product.php?act=add" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> เพิ่มสินค้าใหม่</a></h1>
+                <h1 class="h3 mb-0 text-gray-800">จัดการข้อมูล<a href="product.php?act=add" class="btn btn-primary btn-sm">เพิ่มสินค้าใหม่</a></h1>
             </div>
 
             <?php if (isset($_SESSION['success'])) { ?>
@@ -78,30 +78,41 @@ require_once 'config/db.php';
             <!-- Content Row -->
             <div class="row">
                 <div class="col-md-12 col-lg-12">
-                    <div class="card my-3">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">จัดการข้อมูลสินค้าทั้งหมด</h6>
-                        </div>
-                        <div class="card-body">
-                            <?php
-                            $act = (isset($_GET['act']) ? $_GET['act'] : '');
-                            if ($act == 'add') {
-                                include('product_form_add.php');
-                            } elseif ($act == 'edit') {
-                                include('product_form_edit.php');
-                            } else {
-                                include('product_list.php');
-                            }
-                            ?>
-                        </div>
+                    <div class="card my-3" style="padding: 30px;">
+                        <section class="content">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="box">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="box-body">
+                                                    <?php
+                                                    $act = (isset($_GET['act']) ? $_GET['act'] : '');
+                                                    if ($act == 'add') {
+                                                        include('product_form_add.php');
+                                                    } elseif ($act == 'edit') {
+                                                        include('product_form_edit.php');
+                                                    } else {
+                                                        include('product_list.php');
+                                                    }
+                                                    ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
                     </div>
                 </div>
             </div>
+
+
         </div>
     </div>
-<!-- End of Page Wrapper -->
+    <!-- End of Page Wrapper -->
 
-<?php
-include('includes/scripts.php');
-include('includes/footer.php');
-?>
+    <?php
+    include('includes/scripts.php');
+    include('includes/footer.php');
+    ?>

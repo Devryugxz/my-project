@@ -212,20 +212,76 @@
 
             <!-- Page Heading -->
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">โค้ดส่วนลด</h1>
+                <h1 class="h3 mb-0 text-gray-800">สร้างโค้ดใหม่</h1>
+
             </div>
 
-            <!-- Content Row -->
-            <div class="row">
-                <div class="col-md-12 col-lg-12">
-                    <div class="card" style="padding: 30px;">
-                        <form action="">               
-                            <button type="button" class="btn btn-primary"><a href="sellervouchersnew.php" style="color: white;">สร้างโค้ดส่วนลด</a></button>
-                        </form>
+
+            <section">
+                <div class="pb-5">
+                    <div class="row">
+
+                        <div class="col-lg-6">
+                            <!-- Account details card-->
+                            <div class="card mb-4">
+                                <div class="card-header">ข้อมูลเบื้องต้น</div>
+                                <div class="card-body">
+                                    <form>
+
+                                        <!-- Form Row-->
+                                        <div class="row gx-3 mb-3">
+                                            <!-- Form Group (first name)-->
+                                            <div class="col-md-6">
+                                                <label class="small mb-1" for="">ชื่อโค้ดส่วนลด</label>
+                                                <input class="form-control" id="" type="text" placeholder="ชื่อโค้ดส่วนลด"
+                                                    value="">
+                                            </div>
+                                            <!-- Form Group (last name)-->
+                                            <div class="col-md-6 mb-3">
+                                                <label class="small mb-1" for="">โค้ดส่วนลด</label>
+                                                <input class="form-control" id="" type="text"
+                                                    placeholder="โค้ดส่วนลด" value="">
+                                            </div>
+                                        </div>
+                                        <div class="row gx-3 mb-3">
+                                            <div class="col-md-6">
+                                                <label class="small mb-1" for="">ระยะเวลาที่ใช้โค้ดได้</label>
+                                                <input class="form-control" id="" type="date"
+                                                    placeholder="ชื่อโค้ดส่วนลด" value="">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="small mb-1" for="">ระยะเวลาที่ใช้โค้ดได้</label>
+                                                <input class="form-control" id="" type="date"
+                                                    placeholder="ชื่อโค้ดส่วนลด" value="">
+                                            </div>
+                                        </div>
+
+                                        <div class="card-header text-center mb-3">ส่วนลด</div>
+
+                                        <div class="row gx-3 mb-3">
+                                            <div class="col-md-6">
+                                                <label class="small mb-1" for="">ประเภทส่วนลด | จำนวน</label>
+                                                <input class="form-control" id="" type="text"
+                                                    placeholder="ชื่อโค้ดส่วนลด" value="">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="small mb-1" for="">ราคาขั้นต่ำ</label>
+                                                <input class="form-control" id="" type="text"
+                                                    placeholder="ชื่อโค้ดส่วนลด" value="">
+                                            </div>
+                                        </div>
+                                        <!-- Save changes button-->
+                                        <button class="btn btn-primary" type="button">บันทึกข้อมูล</button>
+                                    </form>
+                                </div>
+                            </div>
+
+
+
+                        </div>
                     </div>
                 </div>
-            </div>
-
+                </section>
 
         </div>
     </div>

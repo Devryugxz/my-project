@@ -11,20 +11,20 @@
             echo '<meta http-equiv="refresh" content="1;url=type.php?act=add" />';
  }
  ?>
- 
+ <p>
 <form action="type_form_add_db.php" method="post" class="form-horizontal">
   <div class="form-group">
-    <div class="col-sm-12 control-label">
+    <div class="col-sm-2 control-label">
       ประเภทสินค้า :
     </div>
-    <div class="col-sm-12">
+    <div class="col-sm-3">
       <input type="text" name="type_name" required class="form-control" minlength="2">
     </div>
   </div>
     <div class="form-group">
-    <div class="col-sm-12">
+    <div class="col-sm-2">
     </div>
-    <div class="col-sm-12">
+    <div class="col-sm-3">
       <button type="submit" class="btn btn-success">เพิ่มข้อมูล</button>
       <a href="type.php" class="btn btn-danger">ยกเลิก</a>
     </div>
