@@ -42,8 +42,8 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     echo "<td> จำนวนการเข้าชม " . $row["p_view"] . " ครั้ง" .
         "<br>วันที่ " . date('d/m/Y', strtotime($row["datesave"])) .
         "</td> ";
-    echo "<td><a href='product.php?act=edit&ID=$row[p_id]' class='btn btn-warning btn-xs'><span class='glyphicon glyphicon-edit'></span></a> 
-        <a href='product_del_db.php?ID=$row[p_id]' onclick=\"return confirm('ยันยันการลบ')\" class='btn btn-danger btn-xs'><span class='glyphicon glyphicon-trash'></span></a>        
+    echo "<td><a href='product.php?act=edit&ID=$row[p_id]' class='btn btn-warning btn-xs fas fa-times-circle'><span class='glyphicon glyphicon-edit'></span></a> 
+        <a href='product_del_db.php?ID=$row[p_id]' onclick=\"return confirm('ยันยันการลบ')\" class='btn btn-danger btn-xs fas fa-trash-alt'><span class='glyphicon glyphicon-trash'></span></a>        
     </td> ";
 }
 echo "</table>";

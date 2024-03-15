@@ -42,9 +42,9 @@ try {
         echo "<tr>";
         echo "<td>" . $row["type_id"] .  "</td> ";
         echo "<td>" . $row["type_name"] .  "</td> ";
-        echo "<td><a href='type.php?act=edit&ID=$row[type_id]' class='btn btn-warning btn-xs'><span class='glyphicon glyphicon-edit'></span></a>         
+        echo "<td><a href='type.php?act=edit&ID=$row[type_id]' class='btn btn-warning btn-xs fas fa-times-circle'><span class='glyphicon glyphicon-edit'></span></a>         
     </td> ";
-        echo "<td><a href='type_del_db.php?ID=$row[type_id]' onclick=\"return confirm('ยันยันการลบ')\" class='btn btn-danger btn-xs'><span class='glyphicon glyphicon-trash'></span></a></td> ";
+        echo "<td><a href='type_del_db.php?ID=$row[type_id]' onclick=\"return confirm('ยันยันการลบ')\" class='btn btn-danger btn-xs fas fa-trash-alt'><span class='glyphicon glyphicon-trash'></span></a></td> ";
         echo "</tr>";
     }
     echo "</table>";
