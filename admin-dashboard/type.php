@@ -32,14 +32,12 @@ if (!isset($_SESSION['seller'])) {
                 <div class="topbar-divider d-none d-sm-block"></div>
                 <!-- Nav Item - User Information -->
                 <li class="nav-item dropdown no-arrow">
-                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $row['username'] ?></span>
                         <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                     </a>
                     <!-- Dropdown - User Information -->
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                        aria-labelledby="userDropdown">
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                         <a href="logout.php" class="dropdown-item">
                             <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                             ออกจากระบบ</a>
@@ -56,32 +54,34 @@ if (!isset($_SESSION['seller'])) {
 
             <!-- Page Heading -->
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">ข้อมูลรายการประเภทสินค้า <a href="type.php?act=add"
-                        class="btn btn-primary btn-sm">เพิ่มประเภทสินค้า</a></h1>
+                <h1 class="h3 mb-0 text-gray-800">ข้อมูลรายการประเภทสินค้า <a href="type.php?act=add" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> เพิ่มประเภทสินค้า</a></h1>
             </div>
 
             <div class="row">
-                <div class="col-md-12 col-lg-12">
+                <div class="col-md-12 col-lg-6">
                     <!-- DataTales Example -->
                     <div class="card mb-4">
-                    <div class="card-body">
-                                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <?php
-                                                $act = (isset($_GET['act']) ? $_GET['act'] : '');
-                                                if($act == 'add'){
-                                                    include('type_form_add.php');
-                                                }elseif ($act == 'edit') {
-                                                    include('type_form_edit.php');
-                                                }else {
-                                                    include('type_list.php');
-                                                }
-                                            ?>
-                                        </div>
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">ประเภทสินค้า</h6>
+                        </div>
+                        <div class="card-body">
+                            <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <?php
+                                        $act = (isset($_GET['act']) ? $_GET['act'] : '');
+                                        if ($act == 'add') {
+                                            include('type_form_add.php');
+                                        } elseif ($act == 'edit') {
+                                            include('type_form_edit.php');
+                                        } else {
+                                            include('type_list.php');
+                                        }
+                                        ?>
                                     </div>
                                 </div>
-                    </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
