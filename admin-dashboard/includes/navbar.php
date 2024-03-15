@@ -27,9 +27,9 @@
         Interface
     </div>
     <li class="nav-item">
-        <a class="nav-link" href="profilecenter.php">
+        <a class="nav-link" href="order_waitconfirmpayment.php">
             <i class="fas fa-fw fa-wrench"></i>
-            <span>โปรไฟล์ของฉัน</span>
+            <span>จัดการคำสั่งซื้อ</span>
         </a>
     </li>
     <li class="nav-item">
@@ -51,21 +51,26 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="sellercenterorder.php">
-            <i class="fas fa-fw fa-wrench"></i>
-            <span>คำสั่งซื้อ</span>
-        </a>
-    </li>
-    <li class="nav-item">
         <a class="nav-link" href="sellervouchers.php">
             <i class="fas fa-fw fa-wrench"></i>
-            <span>โค้ดส่วนลด</span>
+            <span>จัดการโปรโมชั่นส่วนลด</span>
+        </a>
+    </li><li class="nav-item">
+        <a class="nav-link" href="shipping.php">
+            <i class="fas fa-fw fa-wrench"></i>
+            <span>จัดการค่าส่ง</span>
         </a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="previewcenter.php">
             <i class="fas fa-fw fa-wrench"></i>
             <span>หน้าร้านของฉัน</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="profilecenter.php">
+            <i class="fas fa-fw fa-wrench"></i>
+            <span>โปรไฟล์ของฉัน</span>
         </a>
     </li>
 

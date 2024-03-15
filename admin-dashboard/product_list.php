@@ -25,7 +25,8 @@ echo "<tr class=''>
        <th width='30%' class='hidden-xs'>รายละเอียดสินค้า</th>
       <th>ราคาสินค้า</th>
        <th>จำนวนเข้าชม</th>
-      <th width='7%'>-</th>
+       <th width='3%'>-</th>
+       <th width='3%'>-</th>
     </tr>";
 echo "</thead>";
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -42,8 +43,8 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     echo "<td> จำนวนการเข้าชม " . $row["p_view"] . " ครั้ง" .
         "<br>วันที่ " . date('d/m/Y', strtotime($row["datesave"])) .
         "</td> ";
-    echo "<td><a href='product.php?act=edit&ID=$row[p_id]' class='btn btn-warning btn-xs'><span class='glyphicon glyphicon-edit'></span></a> 
-        <a href='product_del_db.php?ID=$row[p_id]' onclick=\"return confirm('ยันยันการลบ')\" class='btn btn-danger btn-xs'><span class='glyphicon glyphicon-trash'></span></a>        
-    </td> ";
+    echo "<td><a href='product.php?act=edit&ID=$row[p_id]' class='btn btn-warning btn-sm'><span class='fas fa-edit'></span></a></td> ";
+    echo "<td><a href='product_del_db.php?ID=$row[p_id]' onclick=\"return confirm('ยันยันการลบ')\" class='btn btn-danger btn-sm'><span class='fas fa-trash-alt'></span></a></td> ";
+    echo "</tr>";
 }
 echo "</table>";
