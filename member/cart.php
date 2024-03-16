@@ -112,7 +112,7 @@ if ($act == 'emtpy') {
     }
 
     .shopping-cart .items .product .info .price {
-      margin-top: 15px;
+      /* margin-top: 15px; */
       font-weight: bold;
       font-size: 22px;
     }
@@ -271,7 +271,7 @@ if ($act == 'emtpy') {
                                 <span><?php echo "฿ " . $sum; ?></span>
                               </div>
                               <div class="col-md-1 price">
-                                <span><a href="cart.php?act=remove&p_id=<?php echo $row["p_id"]; ?>" class="btn btn-danger btn-sm"><i class="fa-solid fa-x"></i></a></span>
+                                <span><a href="cart.php?act=remove&p_id=<?php echo $row["p_id"]; ?>" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a></span>
                               </div>
                             </div>
                           </div>

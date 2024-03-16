@@ -409,7 +409,7 @@ if (isset($_SESSION['c_id'])) {
                                     </li>
                                     </ul>
                             </form>
-                            <button type="submit" class="btn btn-primary btn-lg btn-block" onclick="window.location='checkout.php'">สั่งสินค้า</button>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block w-100" onclick="window.location='checkout.php'">สั่งสินค้า</button>
                         </div>
                     </div>
                 </div>

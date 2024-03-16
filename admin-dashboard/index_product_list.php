@@ -44,7 +44,7 @@
                     <td> จำนวนการเข้าชม <?= $product["p_view"] ?> ครั้ง<br>วันที่
                         <?= date('d/m/Y', strtotime($product["datesave"])) ?></td>
 
-                    <td><a href="sellervouchers_form_add.php?add_id=<?php echo $product['p_id']; ?>" class="btn btn-info">เพิ่มโปรโมชั่น</a></td>
+                    <td><a href="sellervouchers_form_add.php?add_id=<?php echo $product['p_id']; ?>" class="btn btn-info btn-sm">เพิ่มโปรโมชั่น</a></td>
 
             <?php }
         } ?>
