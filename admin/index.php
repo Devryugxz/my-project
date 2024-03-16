@@ -19,9 +19,9 @@ if (!isset($_SESSION['admin'])) {
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
             <?php
 
-            if (isset($_SESSION['admin'])) {
-                $admin_id = $_SESSION['admin'];
-                $stmt = $conn->query("SELECT * FROM tb_users WHERE id = $admin_id");
+            if (isset($_SESSION['tb_admin'])) {
+                $admin_id = $_SESSION['tb_admin'];
+                $stmt = $conn->query("SELECT * FROM tb_customer WHERE id = $admin_id");
                 $stmt->execute();
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
             }
@@ -69,7 +69,7 @@ if (!isset($_SESSION['admin'])) {
                                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                         จำนวนสมาชิก</div>
                                     <?php
-                                    $sql = "SELECT COUNT(*) as users FROM tb_users";
+                                    $sql = "SELECT COUNT(*) as users FROM tb_customer";
                                     $query = $conn->prepare($sql);
                                     $query->execute();
                                     $fetch = $query->fetch();
@@ -126,7 +126,7 @@ if (!isset($_SESSION['admin'])) {
                                             </tfoot>
                                             <tbody>
                                                 <?php
-                                                $select_stmt = $conn->prepare("SELECT * FROM tb_users");
+                                                $select_stmt = $conn->prepare("SELECT * FROM tb_customer");
                                                 $select_stmt->execute();
 
                                                 $users = $select_stmt->fetchAll();
@@ -134,14 +134,14 @@ if (!isset($_SESSION['admin'])) {
                                                 foreach ($users as $user) {
                                                 ?>
                                                     <tr>
-                                                        <td class="sorting_1"><?php echo $user['id']; ?></td>
-                                                        <td><img src="<?php echo $row['m_img']; ?>" class="img-rounded" width="200px"></td>
+                                                        <td class="sorting_1"><?php echo $user['c_id']; ?></td>
+                                                        <td><img src="<?php echo $row['c_img']; ?>" class="img-rounded" width="200px"></td>
                                                         <td><?php echo $user['username']; ?></td>
                                                         <td><?php echo $user['role']; ?></td>
-                                                        <td><?php echo $user['m_name']; ?></td>
+                                                        <td><?php echo $user['firstname']; ?></td>
                                                         <td><?php echo $user['email']; ?></td>
-                                                        <td><?php echo $user['m_tel']; ?></td>
-                                                        <td><?php echo $user['m_address']; ?></td>
+                                                        <td><?php echo $user['phone']; ?></td>
+                                                        <td><?php echo $user['role']; ?></td>
                                                         <td><?php echo $user['created_at']; ?></td>
                                                     </tr>
                                                 <?php

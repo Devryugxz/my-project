@@ -41,9 +41,9 @@ if (isset($_GET['search']) && $_GET['search'] != '') {
                 <div class="d-flex bd-highlight">
                     <?php
 
-                    if (isset($_SESSION['customer'])) {
-                        $user_id = $_SESSION['customer'];
-                        $stmt = $conn->query("SELECT * FROM tb_users WHERE id = $user_id");
+                    if (isset($_SESSION['tb_customer'])) {
+                        $user_id = $_SESSION['tb_customer'];
+                        $stmt = $conn->query("SELECT * FROM tb_product WHERE id = $user_id");
                         $stmt->execute();
                         $row = $stmt->fetch(PDO::FETCH_ASSOC);
                     }
