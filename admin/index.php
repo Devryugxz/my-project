@@ -4,7 +4,9 @@ include('includes/navbar.php');
 
 session_start();
 require_once 'config/db.php';
+
 if (!isset($_SESSION['admin'])) {
+    $_SESSION['error'] = 'กรุณาเข้าสู่ระบบ';
     header("location: login.php");
 }
 ?>

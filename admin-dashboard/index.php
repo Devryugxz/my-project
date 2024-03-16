@@ -18,12 +18,11 @@ if (!isset($_SESSION['seller'])) {
 
         <!-- Topbar -->
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
             <?php
 
             if (isset($_SESSION['seller'])) {
                 $s_id = $_SESSION['seller'];
-                $stmt = $conn->query("SELECT * FROM tb_seller WHERE s_id = $s_id");
+                $stmt = $conn->query("SELECT * FROM tb_masterlogin WHERE master_id = $s_id");
                 $stmt->execute();
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
             }

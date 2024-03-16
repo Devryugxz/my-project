@@ -23,7 +23,7 @@ if (!isset($_SESSION['seller'])) {
 
             if (isset($_SESSION['seller'])) {
                 $s_id = $_SESSION['seller'];
-                $stmt = $conn->query("SELECT * FROM tb_seller WHERE s_id = $s_id");
+                $stmt = $conn->query("SELECT * FROM tb_masterlogin WHERE master_id = $s_id");
                 $stmt->execute();
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
             }
@@ -160,14 +160,11 @@ if (!isset($_SESSION['seller'])) {
                                         <div class="card-body">
                                             <section>
                                                 <div>
-                                                    <div
-                                                        class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                                                    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                                                         <div class="col mb-5">
                                                             <div class="card h-100">
                                                                 <!-- Product image-->
-                                                                <img class="card-img-top"
-                                                                    src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
-                                                                    alt="..." />
+                                                                <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
                                                                 <!-- Product details-->
                                                                 <div class="card-body p-4">
                                                                     <div class="text-center">
@@ -183,20 +180,16 @@ if (!isset($_SESSION['seller'])) {
                                                         <div class="col mb-5">
                                                             <div class="card h-100">
                                                                 <!-- Sale badge-->
-                                                                <div class="badge bg-dark text-white position-absolute"
-                                                                    style="top: 0.5rem; right: 0.5rem">Sale</div>
+                                                                <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
                                                                 <!-- Product image-->
-                                                                <img class="card-img-top"
-                                                                    src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
-                                                                    alt="..." />
+                                                                <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
                                                                 <!-- Product details-->
                                                                 <div class="card-body p-4">
                                                                     <div class="text-center">
                                                                         <!-- Product name-->
                                                                         <h5 class="fw-bolder">Product Name</h5>
                                                                         <!-- Product reviews-->
-                                                                        <div
-                                                                            class="d-flex justify-content-center small text-warning mb-2">
+                                                                        <div class="d-flex justify-content-center small text-warning mb-2">
                                                                             <div class="bi-star-fill"></div>
                                                                             <div class="bi-star-fill"></div>
                                                                             <div class="bi-star-fill"></div>
@@ -204,8 +197,7 @@ if (!isset($_SESSION['seller'])) {
                                                                             <div class="bi-star-fill"></div>
                                                                         </div>
                                                                         <!-- Product price-->
-                                                                        <span
-                                                                            class="text-muted text-decoration-line-through">ราคาต่อหน่วย
+                                                                        <span class="text-muted text-decoration-line-through">ราคาต่อหน่วย
                                                                             บาท/กก.</span>
                                                                     </div>
                                                                 </div>
@@ -215,20 +207,16 @@ if (!isset($_SESSION['seller'])) {
                                                         <div class="col mb-5">
                                                             <div class="card h-100">
                                                                 <!-- Sale badge-->
-                                                                <div class="badge bg-dark text-white position-absolute"
-                                                                    style="top: 0.5rem; right: 0.5rem">Sale</div>
+                                                                <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
                                                                 <!-- Product image-->
-                                                                <img class="card-img-top"
-                                                                    src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
-                                                                    alt="..." />
+                                                                <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
                                                                 <!-- Product details-->
                                                                 <div class="card-body p-4">
                                                                     <div class="text-center">
                                                                         <!-- Product name-->
                                                                         <h5 class="fw-bolder">Product Name</h5>
                                                                         <!-- Product price-->
-                                                                        <span
-                                                                            class="text-muted text-decoration-line-through">ราคาต่อหน่วย
+                                                                        <span class="text-muted text-decoration-line-through">ราคาต่อหน่วย
                                                                             บาท/กก.</span>
                                                                     </div>
                                                                 </div>
@@ -238,17 +226,14 @@ if (!isset($_SESSION['seller'])) {
                                                         <div class="col mb-5">
                                                             <div class="card h-100">
                                                                 <!-- Product image-->
-                                                                <img class="card-img-top"
-                                                                    src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
-                                                                    alt="..." />
+                                                                <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
                                                                 <!-- Product details-->
                                                                 <div class="card-body p-4">
                                                                     <div class="text-center">
                                                                         <!-- Product name-->
                                                                         <h5 class="fw-bolder">Product Name</h5>
                                                                         <!-- Product reviews-->
-                                                                        <div
-                                                                            class="d-flex justify-content-center small text-warning mb-2">
+                                                                        <div class="d-flex justify-content-center small text-warning mb-2">
                                                                             <div class="bi-star-fill"></div>
                                                                             <div class="bi-star-fill"></div>
                                                                             <div class="bi-star-fill"></div>
@@ -265,20 +250,16 @@ if (!isset($_SESSION['seller'])) {
                                                         <div class="col mb-5">
                                                             <div class="card h-100">
                                                                 <!-- Sale badge-->
-                                                                <div class="badge bg-dark text-white position-absolute"
-                                                                    style="top: 0.5rem; right: 0.5rem">Sale</div>
+                                                                <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
                                                                 <!-- Product image-->
-                                                                <img class="card-img-top"
-                                                                    src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
-                                                                    alt="..." />
+                                                                <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
                                                                 <!-- Product details-->
                                                                 <div class="card-body p-4">
                                                                     <div class="text-center">
                                                                         <!-- Product name-->
                                                                         <h5 class="fw-bolder">Product Name</h5>
                                                                         <!-- Product price-->
-                                                                        <span
-                                                                            class="text-muted text-decoration-line-through">ราคาต่อหน่วย
+                                                                        <span class="text-muted text-decoration-line-through">ราคาต่อหน่วย
                                                                             บาท/กก.</span>
                                                                     </div>
                                                                 </div>
@@ -288,9 +269,7 @@ if (!isset($_SESSION['seller'])) {
                                                         <div class="col mb-5">
                                                             <div class="card h-100">
                                                                 <!-- Product image-->
-                                                                <img class="card-img-top"
-                                                                    src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
-                                                                    alt="..." />
+                                                                <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
                                                                 <!-- Product details-->
                                                                 <div class="card-body p-4">
                                                                     <div class="text-center">
@@ -306,20 +285,16 @@ if (!isset($_SESSION['seller'])) {
                                                         <div class="col mb-5">
                                                             <div class="card h-100">
                                                                 <!-- Sale badge-->
-                                                                <div class="badge bg-dark text-white position-absolute"
-                                                                    style="top: 0.5rem; right: 0.5rem">Sale</div>
+                                                                <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
                                                                 <!-- Product image-->
-                                                                <img class="card-img-top"
-                                                                    src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
-                                                                    alt="..." />
+                                                                <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
                                                                 <!-- Product details-->
                                                                 <div class="card-body p-4">
                                                                     <div class="text-center">
                                                                         <!-- Product name-->
                                                                         <h5 class="fw-bolder">Product Name</h5>
                                                                         <!-- Product reviews-->
-                                                                        <div
-                                                                            class="d-flex justify-content-center small text-warning mb-2">
+                                                                        <div class="d-flex justify-content-center small text-warning mb-2">
                                                                             <div class="bi-star-fill"></div>
                                                                             <div class="bi-star-fill"></div>
                                                                             <div class="bi-star-fill"></div>
@@ -327,8 +302,7 @@ if (!isset($_SESSION['seller'])) {
                                                                             <div class="bi-star-fill"></div>
                                                                         </div>
                                                                         <!-- Product price-->
-                                                                        <span
-                                                                            class="text-muted text-decoration-line-through">ราคาต่อหน่วย
+                                                                        <span class="text-muted text-decoration-line-through">ราคาต่อหน่วย
                                                                             บาท/กก.</span>
                                                                     </div>
                                                                 </div>
@@ -338,17 +312,14 @@ if (!isset($_SESSION['seller'])) {
                                                         <div class="col mb-5">
                                                             <div class="card h-100">
                                                                 <!-- Product image-->
-                                                                <img class="card-img-top"
-                                                                    src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg"
-                                                                    alt="..." />
+                                                                <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
                                                                 <!-- Product details-->
                                                                 <div class="card-body p-4">
                                                                     <div class="text-center">
                                                                         <!-- Product name-->
                                                                         <h5 class="fw-bolder">Product Name</h5>
                                                                         <!-- Product reviews-->
-                                                                        <div
-                                                                            class="d-flex justify-content-center small text-warning mb-2">
+                                                                        <div class="d-flex justify-content-center small text-warning mb-2">
                                                                             <div class="bi-star-fill"></div>
                                                                             <div class="bi-star-fill"></div>
                                                                             <div class="bi-star-fill"></div>
@@ -379,7 +350,7 @@ if (!isset($_SESSION['seller'])) {
     <!-- End of Page Wrapper -->
 
 
-    <?php 
-    include ('includes/scripts.php');
-    include ('includes/footer.php');
-?>
+    <?php
+    include('includes/scripts.php');
+    include('includes/footer.php');
+    ?>
