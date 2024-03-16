@@ -26,12 +26,12 @@
     <div class="sidebar-heading">
         Interface
     </div>
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link" href="order_waitconfirmpayment.php">
             <i class="fas fa-fw fa-wrench"></i>
             <span>จัดการคำสั่งซื้อ</span>
         </a>
-    </li>
+    </li> -->
     <li class="nav-item">
         <a class="nav-link" href="product.php">
             <i class="fas fa-fw fa-wrench"></i>

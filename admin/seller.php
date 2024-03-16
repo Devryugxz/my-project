@@ -29,31 +29,24 @@ if (!isset($_SESSION['admin'])) {
                 $stmt->execute();
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
             }
-            
+
             ?>
 
             <!-- Topbar Navbar -->
             <ul class="navbar-nav ml-auto">
-
-                <!-- Topbar Navbar -->
-                <ul class="navbar-nav ml-auto">
-                    <div class="topbar-divider d-none d-sm-block"></div>
-                    <!-- Nav Item - User Information -->
-                    <li class="nav-item dropdown no-arrow">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $row['username'] ?></span>
-                            <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
-                        </a>
-                        <!-- Dropdown - User Information -->
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                            <a href="logout.php" class="dropdown-item">
-                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                ออกจากระบบ</a>
-                        </div>
-                    </li>
-
-                </ul>
-
+                <div class="topbar-divider d-none d-sm-block"></div>
+                <!-- Nav Item - User Information -->
+                <li class="nav-item dropdown no-arrow">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $row['username'] ?></span>
+                        <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                    </a>
+                    <!-- Dropdown - User Information -->
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                        <a href="logout.php" class="dropdown-item">
+                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>ออกจากระบบ</a>
+                    </div>
+                </li>
             </ul>
 
         </nav>
@@ -64,7 +57,7 @@ if (!isset($_SESSION['admin'])) {
 
             <!-- Page Heading -->
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">Admin</h1>
+                <h1 class="h3 mb-0 text-gray-800">ข้อมูลผู้ประกอบการ</h1>
             </div>
 
             <div class="row">
@@ -73,19 +66,14 @@ if (!isset($_SESSION['admin'])) {
                     <!-- DataTales Example -->
                     <div class="card mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">ข้อมูลทั้งหมด</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">ข้อมูลผู้ประกอบการทั้งหมด</h6>
                         </div>
                         <div class="card-body">
                             <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <?php
-                                        $act = isset($_GET['act']) ? $_GET['act'] : '';
-                                        if ($act == 'add') {
-                                            include('admin_form_edit.php');
-                                        } else {
-                                            include('admin_list.php');
-                                        }
+                                        include('seller_list.php');
                                         ?>
                                     </div>
                                 </div>
