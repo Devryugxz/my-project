@@ -89,11 +89,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                             <h3 class="fw-bolder">รายละเอียดสินค้า</h3>
                             <p class="lead"><?php echo $row["p_detail"]; ?></p>
-                            <p><?php echo $row["type_name"]; ?></p>
+                            <p>ประเภท: <?php echo $row["type_name"]; ?></p>
 
                             <div class="d-flex">
                                 <!-- <input class="form-control text-center me-3" id="inputQuantity" name="amount" type="text" value="1" style="max-width: 10rem" /> -->
-                                คงเหลือ <font color=""> <?php echo $row["p_qty"]; ?> <?php echo $row["p_unit"]; ?> </font>
+                                <p>คงเหลือ <?php echo $row["p_qty"]; ?> <?php echo $row["p_unit"]; ?></p>
                             </div>
                             <input class="btn btn-success mt-3" type="submit" value="เพิ่มลงตะกร้า" class="btnAddAction">
 

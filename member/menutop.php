@@ -58,7 +58,7 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="#">การซื้อของฉัน</a></li>
+                            <li><a class="dropdown-item" href="my_purchase.php">การซื้อของฉัน</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
