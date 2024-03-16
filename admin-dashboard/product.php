@@ -2,11 +2,14 @@
 include('includes/header.php');
 include('includes/navbar.php');
 
+session_start();
 require_once 'config/db.php';
 
+if (!isset($_SESSION['seller'])) {
+    $_SESSION['error'] = 'กรุณาเข้าสู่ระบบ';
+    header("location: ../login.php");
+}
 ?>
-
-
 <!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column">
 
@@ -16,19 +19,23 @@ require_once 'config/db.php';
         <!-- Topbar -->
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-            <!-- Sidebar Toggle (Topbar) -->
-            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                <i class="fa fa-bars"></i>
-            </button>
+            <?php
+
+            if (isset($_SESSION['seller'])) {
+                $s_id = $_SESSION['seller'];
+                $stmt = $conn->query("SELECT * FROM tb_seller WHERE s_id = $s_id");
+                $stmt->execute();
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            }
+
+            ?>
             <!-- Topbar Navbar -->
             <ul class="navbar-nav ml-auto">
-
                 <div class="topbar-divider d-none d-sm-block"></div>
-
                 <!-- Nav Item - User Information -->
                 <li class="nav-item dropdown no-arrow">
                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin</span>
+                        <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $row['username'] ?></span>
                         <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                     </a>
                     <!-- Dropdown - User Information -->
@@ -38,13 +45,11 @@ require_once 'config/db.php';
                             Profile
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Logout
+                        <a href="logout.php" class="dropdown-item">
+                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>ออกจากระบบ</a>
                         </a>
                     </div>
                 </li>
-
             </ul>
 
         </nav>
@@ -99,9 +104,9 @@ require_once 'config/db.php';
             </div>
         </div>
     </div>
-<!-- End of Page Wrapper -->
+    <!-- End of Page Wrapper -->
 
-<?php
-include('includes/scripts.php');
-include('includes/footer.php');
-?>
+    <?php
+    include('includes/scripts.php');
+    include('includes/footer.php');
+    ?>

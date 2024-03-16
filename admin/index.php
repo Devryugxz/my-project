@@ -20,8 +20,8 @@ if (!isset($_SESSION['admin'])) {
             <?php
 
             if (isset($_SESSION['admin'])) {
-                $admin_id = $_SESSION['admin'];
-                $stmt = $conn->query("SELECT * FROM tb_users WHERE id = $admin_id");
+                $a_id = $_SESSION['admin'];
+                $stmt = $conn->query("SELECT * FROM tb_admin WHERE a_id = $a_id");
                 $stmt->execute();
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
             }
@@ -39,11 +39,9 @@ if (!isset($_SESSION['admin'])) {
                     <!-- Dropdown - User Information -->
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                         <a href="logout.php" class="dropdown-item">
-                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                            ออกจากระบบ</a>
+                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>ออกจากระบบ</a>
                     </div>
                 </li>
-
             </ul>
 
         </nav>
@@ -69,7 +67,7 @@ if (!isset($_SESSION['admin'])) {
                                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                         จำนวนสมาชิก</div>
                                     <?php
-                                    $sql = "SELECT COUNT(*) as users FROM tb_users";
+                                    $sql = "SELECT COUNT(*) as users FROM tb_masterlogin";
                                     $query = $conn->prepare($sql);
                                     $query->execute();
                                     $fetch = $query->fetch();
@@ -101,32 +99,32 @@ if (!isset($_SESSION['admin'])) {
                                             <thead>
                                                 <tr role="row">
                                                     <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="ID: activate to sort column descending" style="width: 271px;">ID</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="รูป: activate to sort column ascending" style="width: 160px;">รูป</th>
+                                                    <!-- <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="รูป: activate to sort column ascending" style="width: 160px;">รูป</th> -->
                                                     <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Username: activate to sort column ascending" style="width: 130px;">Username</th>
                                                     <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="Role: activate to sort column ascending" style="width: 189px;">Role</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="ชื่อผู้ใช้: activate to sort column ascending" style="width: 189px;">ชื่อผู้ใช้</th>
+                                                    <!-- <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="ชื่อผู้ใช้: activate to sort column ascending" style="width: 189px;">ชื่อผู้ใช้</th> -->
                                                     <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="อีเมล: activate to sort column ascending" style="width: 189px;">อีเมล</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="เบอร์โทรศัพท์: activate to sort column ascending" style="width: 189px;">เบอร์โทรศัพท์</th>
-                                                    <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="ที่อยู่: activate to sort column ascending" style="width: 189px;">ที่อยู่</th>
+                                                    <!-- <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="เบอร์โทรศัพท์: activate to sort column ascending" style="width: 189px;">เบอร์โทรศัพท์</th> -->
+                                                    <!-- <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="ที่อยู่: activate to sort column ascending" style="width: 189px;">ที่อยู่</th> -->
                                                     <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" aria-label="วันที่และเวลาที่สมัคร: activate to sort column ascending" style="width: 189px;">วันที่และเวลาที่สมัคร</th>
                                                 </tr>
                                             </thead>
                                             <tfoot>
                                                 <tr>
                                                     <th rowspan="1" colspan="1">ID</th>
-                                                    <th rowspan="1" colspan="1">รูป</th>
+                                                    <!-- <th rowspan="1" colspan="1">รูป</th> -->
                                                     <th rowspan="1" colspan="1">Username</th>
                                                     <th rowspan="1" colspan="1">Role</th>
-                                                    <th rowspan="1" colspan="1">ชื่อผู้ใช้</th>
+                                                    <!-- <th rowspan="1" colspan="1">ชื่อผู้ใช้</th> -->
                                                     <th rowspan="1" colspan="1">อีเมล</th>
-                                                    <th rowspan="1" colspan="1">เบอร์โทรศัพท์</th>
-                                                    <th rowspan="1" colspan="1">ที่อยู่</th>
+                                                    <!-- <th rowspan="1" colspan="1">เบอร์โทรศัพท์</th> -->
+                                                    <!-- <th rowspan="1" colspan="1">ที่อยู่</th> -->
                                                     <th rowspan="1" colspan="1">วันที่และเวลาที่สมัคร</th>
                                                 </tr>
                                             </tfoot>
                                             <tbody>
                                                 <?php
-                                                $select_stmt = $conn->prepare("SELECT * FROM tb_users");
+                                                $select_stmt = $conn->prepare("SELECT * FROM tb_masterlogin");
                                                 $select_stmt->execute();
 
                                                 $users = $select_stmt->fetchAll();
@@ -134,14 +132,13 @@ if (!isset($_SESSION['admin'])) {
                                                 foreach ($users as $user) {
                                                 ?>
                                                     <tr>
-                                                        <td class="sorting_1"><?php echo $user['id']; ?></td>
-                                                        <td><img src="<?php echo $row['m_img']; ?>" class="img-rounded" width="200px"></td>
+                                                        <td class="sorting_1"><?php echo $user['master_id']; ?></td>
+                                                        <!-- <td><img src="<?php echo $row['m_img']; ?>" class="img-rounded" width="200px"></td> -->
                                                         <td><?php echo $user['username']; ?></td>
                                                         <td><?php echo $user['role']; ?></td>
-                                                        <td><?php echo $user['m_name']; ?></td>
                                                         <td><?php echo $user['email']; ?></td>
-                                                        <td><?php echo $user['m_tel']; ?></td>
-                                                        <td><?php echo $user['m_address']; ?></td>
+                                                        <!-- <td><?php echo $user['phone']; ?></td> -->
+                                                        <!-- <td><?php echo $user['m_address']; ?></td> -->
                                                         <td><?php echo $user['created_at']; ?></td>
                                                     </tr>
                                                 <?php
@@ -155,13 +152,6 @@ if (!isset($_SESSION['admin'])) {
                         </div>
                     </div>
 
-                </div>
-
-
-                <div class="row">
-                    <div class="col-md-12 col-lg-12">
-
-                    </div>
                 </div>
             </div>
         </div>

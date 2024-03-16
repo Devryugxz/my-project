@@ -27,9 +27,15 @@
         Interface
     </div>
     <li class="nav-item">
-        <a class="nav-link" href="admin.php">
+        <a class="nav-link" href="customer.php">
             <i class="fas fa-fw fa-wrench"></i>
-            <span>จัดการข้อมูลผู้ใช้งาน</span>
+            <span>จัดการข้อมูลลูกค้า</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="seller.php">
+            <i class="fas fa-fw fa-wrench"></i>
+            <span>จัดการข้อมูลผู้ประกอบการ</span>
         </a>
     </li>
 

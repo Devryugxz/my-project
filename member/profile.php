@@ -5,40 +5,49 @@ require_once('config/db.php');
 if (!isset($_SESSION['customer'])) {
     $_SESSION['error'] = 'กรุณาเข้าสู่ระบบ';
     header("location: login.php");
+    exit();
 }
 
-// ดึงข้อมูลผู้ใช้จากฐานข้อมูล
-if (isset($_SESSION['customer'])) {
-    $c_id = $_SESSION['customer'];
-    $stmt = $conn->query("SELECT * FROM tb_customer WHERE c_id = $c_id");
-    $stmt->execute();
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-}
-
-// ตรวจสอบว่ามีการส่งข้อมูลฟอร์มมาหรือไม่
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // ดึงข้อมูลที่แก้ไขจากฟอร์ม
-    $new_username = isset($_POST['username']) ? htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8') : $user['username'];
-    $new_email = isset($_POST['email']) ? htmlspecialchars($_POST['email'], ENT_QUOTES, 'UTF-8') : $user['email'];
-    $new_name = isset($_POST['m_name']) ? htmlspecialchars($_POST['m_name'], ENT_QUOTES, 'UTF-8') : $user['m_name'];
-    $new_tel = isset($_POST['m_tel']) ? htmlspecialchars($_POST['m_tel'], ENT_QUOTES, 'UTF-8') : $user['m_tel'];
-    $new_address = isset($_POST['m_address']) ? htmlspecialchars($_POST['m_address'], ENT_QUOTES, 'UTF-8') : $user['m_address'];
-
-    // ปรับปรุงข้อมูลในฐานข้อมูล
-    $update_stmt = $conn->prepare("UPDATE tb_users SET username = :username, email = :email, m_name = :m_name, m_tel = :m_tel, m_address = :m_address WHERE c_id = :id");
-    $update_stmt->bindParam(':username', $new_username);
-    $update_stmt->bindParam(':email', $new_email);
-    $update_stmt->bindParam(':m_name', $new_name);
-    $update_stmt->bindParam(':m_tel', $new_tel);
-    $update_stmt->bindParam(':m_address', $new_address);
-    $update_stmt->bindParam(':id', $c_id);
-
-    if ($update_stmt->execute()) {
-        echo "ข้อมูลถูกปรับปรุงเรียบร้อยแล้ว";
-        // สามารถทำการ redirect หรือแสดงข้อความอื่น ๆ ตามต้องการ
-    } else {
-        echo "เกิดข้อผิดพลาดในการปรับปรุงข้อมูล";
+try {
+    // ดึงข้อมูลผู้ใช้จากฐานข้อมูล
+    if (isset($_SESSION['customer'])) {
+        $c_id = $_SESSION['customer'];
+        $stmt = $conn->query("SELECT * FROM tb_customer WHERE c_id = $c_id");
+        $stmt->execute();
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    // ตรวจสอบว่ามีการส่งข้อมูลฟอร์มมาหรือไม่
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // ดึงข้อมูลที่แก้ไขจากฟอร์ม
+        $new_username = isset($_POST['username']) ? htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8') : $user['username'];
+        $new_email = isset($_POST['email']) ? htmlspecialchars($_POST['email'], ENT_QUOTES, 'UTF-8') : $user['email'];
+        $new_firstname = isset($_POST['firstname']) ? htmlspecialchars($_POST['firstname'], ENT_QUOTES, 'UTF-8') : $user['firstname'];
+        $new_lastname = isset($_POST['lastname']) ? htmlspecialchars($_POST['lastname'], ENT_QUOTES, 'UTF-8') : $user['lastname'];
+        $new_phone = isset($_POST['phone']) ? htmlspecialchars($_POST['phone'], ENT_QUOTES, 'UTF-8') : $user['phone'];
+        // $new_address = isset($_POST['m_address']) ? htmlspecialchars($_POST['m_address'], ENT_QUOTES, 'UTF-8') : $user['m_address'];
+
+        // ปรับปรุงข้อมูลในฐานข้อมูล
+        $update_stmt = $conn->prepare("UPDATE tb_customer SET username = :username, email = :email, firstname = :firstname, lastname = :lastname, phone = :phone WHERE c_id = :c_id");
+        $update_stmt->bindParam(':username', $new_username);
+        $update_stmt->bindParam(':email', $new_email);
+        $update_stmt->bindParam(':firstname', $new_firstname); // แก้เป็น ':firstname'
+        $update_stmt->bindParam(':lastname', $new_lastname); // แก้เป็น ':lastname'
+        $update_stmt->bindParam(':phone', $new_phone);
+        $update_stmt->bindParam(':c_id', $c_id);
+
+
+        if ($update_stmt->execute()) {
+            echo "<script type='text/javascript'>";
+            echo "alert('ข้อมูลถูกปรับปรุงเรียบร้อยแล้ว..');";
+            echo "window.location = 'profile.php';";
+            echo "</script>";
+        } else {
+            echo "เกิดข้อผิดพลาดในการปรับปรุงข้อมูล";
+        }
+    }
+} catch (PDOException $e) {
+    echo "เกิดข้อผิดพลาด: " . $e->getMessage();
 }
 ?>
 
@@ -65,10 +74,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="col-lg-4">
                         <div class="card mb-4">
                             <div class="card-body text-center">
-                                <img src="../m_img/<?php echo $user['m_img']; ?>" width="200px">
-                                <h5 class="my-3"><?= $user['firstname'] ?> <?= $user['lastname'] ?></h5>
-                                <p class="text-muted mb-1">ขนาดไฟล์: สูงสุด 1 MB</p>
-                                <p class="text-muted mb-4">ไฟล์ที่รองรับ: .JPEG, .PNG</p>
+                                <?php if (isset($user['m_img']) && $user['m_img']) : ?>
+                                    <img src="../m_img/<?php echo $user['m_img']; ?>" width="200px">
+                                <?php else : ?>
+                                    <img src="../Image/no-photo-available.png" width="200px"> <!-- หรือเพิ่มภาพที่คุณต้องการแสดงเมื่อไม่มีภาพโปรไฟล์ -->
+                                <?php endif; ?>
+                                <h5 class="my-3"><!-- Inside the HTML code where you're accessing $user -->
+                                    <?= isset($user['firstname']) ? $user['firstname'] : '' ?>
+                                    <?= isset($user['lastname']) ? $user['lastname'] : '' ?>
+                                </h5>
+                                <!-- <p class="text-muted mb-1">ขนาดไฟล์: สูงสุด 1 MB</p>
+                                <p class="text-muted mb-4">ไฟล์ที่รองรับ: .JPEG, .PNG</p> -->
                             </div>
                         </div>
                     </div>
@@ -128,6 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary mb-3">บันทึกข้อมูล</button>
+                        <a href="../member/" class="btn btn-danger mb-3">ยกเลิก</a>
                     </div>
                 </div>
             </form>

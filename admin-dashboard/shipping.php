@@ -4,11 +4,12 @@ include('includes/navbar.php');
 
 session_start();
 require_once 'config/db.php';
+
 if (!isset($_SESSION['seller'])) {
-    header("location: login.php");
+    $_SESSION['error'] = 'กรุณาเข้าสู่ระบบ';
+    header("location: ../login.php");
 }
 ?>
-
 <!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column">
 
@@ -17,6 +18,7 @@ if (!isset($_SESSION['seller'])) {
 
         <!-- Topbar -->
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
             <?php
 
             if (isset($_SESSION['seller'])) {
@@ -38,12 +40,16 @@ if (!isset($_SESSION['seller'])) {
                     </a>
                     <!-- Dropdown - User Information -->
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                        <a class="dropdown-item" href="profilecenter.php">
+                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Profile
+                        </a>
+                        <div class="dropdown-divider"></div>
                         <a href="logout.php" class="dropdown-item">
-                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                            ออกจากระบบ</a>
+                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>ออกจากระบบ</a>
+                        </a>
                     </div>
                 </li>
-
             </ul>
 
         </nav>
