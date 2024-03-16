@@ -23,7 +23,7 @@ if (!isset($_SESSION['seller'])) {
 
             if (isset($_SESSION['seller'])) {
                 $s_id = $_SESSION['seller'];
-                $stmt = $conn->query("SELECT * FROM tb_seller WHERE s_id = $s_id");
+                $stmt = $conn->query("SELECT * FROM tb_masterlogin WHERE master_id = $s_id");
                 $stmt->execute();
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
             }
@@ -60,7 +60,7 @@ if (!isset($_SESSION['seller'])) {
 
             <!-- Page Heading -->
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">จัดการโปรโมชันส่วนลด</h1>
+                <h1 class="h3 mb-0 text-gray-800">จัดการโปรโมชันส่วนลด <a href='sellervouchers.php?act=add&ID=$row[p_id]' class='btn btn-info btn-sm'> <span class=''></span>เพิ่มโปรโมชั่น</a></h1>
             </div>
 
             <?php if (isset($_SESSION['success'])) { ?>
@@ -88,7 +88,7 @@ if (!isset($_SESSION['seller'])) {
                             <h6 class="m-0 font-weight-bold text-primary">จัดการโปรโมชัน</h6>
                         </div>
                         <div class="card-body">
-                            <?php                            
+                            <?php
                             $act = (isset($_GET['act']) ? $_GET['act'] : '');
                             if ($act == 'add') {
                                 include('sellervouchers_form_add.php');

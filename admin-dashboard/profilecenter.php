@@ -10,41 +10,48 @@ if (!isset($_SESSION['seller'])) {
     header("location: login.php");
 }
 
-// ดึงข้อมูลผู้ใช้จากฐานข้อมูล
-if (isset($_SESSION['seller'])) {
-    $s_id = $_SESSION['seller'];
-    $stmt = $conn->prepare("SELECT * FROM tb_seller WHERE s_id = :s_id");
-    $stmt->bindParam(':s_id', $s_id);
-    $stmt->execute();
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-}
-
-// ตรวจสอบว่ามีการส่งข้อมูลฟอร์มมาหรือไม่
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // ดึงข้อมูลที่แก้ไขจากฟอร์ม
-    $new_username = isset($_POST['username']) ? htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8') : $user['username'];
-    $new_firstname = isset($_POST['firstname']) ? htmlspecialchars($_POST['firstname'], ENT_QUOTES, 'UTF-8') : $user['firstname'];
-    $new_lastname = isset($_POST['lastname']) ? htmlspecialchars($_POST['lastname'], ENT_QUOTES, 'UTF-8') : $user['lastname'];
-    $new_email = isset($_POST['email']) ? htmlspecialchars($_POST['email'], ENT_QUOTES, 'UTF-8') : $user['email'];
-    $new_name = isset($_POST['name']) ? htmlspecialchars($_POST['name'], ENT_QUOTES, 'UTF-8') : $user['name'];
-    $new_tel = isset($_POST['phone']) ? htmlspecialchars($_POST['phone'], ENT_QUOTES, 'UTF-8') : $user['phone'];
-
-    // ปรับปรุงข้อมูลในฐานข้อมูล
-    $update_stmt = $conn->prepare("UPDATE tb_seller SET username = :username, firstname = :firstname, lastname = :lastname, email = :email, name = :name, phone = :phone WHERE s_id = :s_id");
-    $update_stmt->bindParam(':username', $new_username);
-    $update_stmt->bindParam(':firstname', $new_firstname);
-    $update_stmt->bindParam(':lastname', $new_lastname);
-    $update_stmt->bindParam(':email', $new_email);
-    $update_stmt->bindParam(':name', $new_name);
-    $update_stmt->bindParam(':phone', $new_tel);
-    $update_stmt->bindParam(':s_id', $s_id);
-
-    if ($update_stmt->execute()) {
-        echo "ข้อมูลถูกปรับปรุงเรียบร้อยแล้ว";
-        // สามารถทำการ redirect หรือแสดงข้อความอื่น ๆ ตามต้องการ
-    } else {
-        echo "เกิดข้อผิดพลาดในการปรับปรุงข้อมูล";
+try {
+    // ดึงข้อมูลผู้ใช้จากฐานข้อมูล
+    if (isset($_SESSION['seller'])) {
+        $s_id = $_SESSION['seller'];
+        $stmt = $conn->prepare("SELECT * FROM tb_seller WHERE s_id = :s_id");
+        $stmt->bindParam(':s_id', $s_id);
+        $stmt->execute();
     }
+
+    // ตรวจสอบว่ามีการส่งข้อมูลฟอร์มมาหรือไม่
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // ดึงข้อมูลที่แก้ไขจากฟอร์ม
+        $new_username = isset($_POST['username']) ? htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8') : $user['username'];
+        $new_firstname = isset($_POST['firstname']) ? htmlspecialchars($_POST['firstname'], ENT_QUOTES, 'UTF-8') : $user['firstname'];
+        $new_lastname = isset($_POST['lastname']) ? htmlspecialchars($_POST['lastname'], ENT_QUOTES, 'UTF-8') : $user['lastname'];
+        $new_email = isset($_POST['email']) ? htmlspecialchars($_POST['email'], ENT_QUOTES, 'UTF-8') : $user['email'];
+        $new_name = isset($_POST['name']) ? htmlspecialchars($_POST['name'], ENT_QUOTES, 'UTF-8') : $user['name'];
+        $new_phone = isset($_POST['phone']) ? htmlspecialchars($_POST['phone'], ENT_QUOTES, 'UTF-8') : $user['phone'];
+
+
+        // ปรับปรุงข้อมูลในฐานข้อมูล
+        $update_stmt = $conn->prepare("UPDATE tb_seller SET username = :username, firstname = :firstname, lastname = :lastname, email = :email, name = :name, phone = :phone WHERE s_id = :s_id");
+        $update_stmt->bindParam(':username', $new_username);
+        $update_stmt->bindParam(':firstname', $new_firstname);
+        $update_stmt->bindParam(':lastname', $new_lastname);
+        $update_stmt->bindParam(':email', $new_email);
+        $update_stmt->bindParam(':name', $new_name);
+        $update_stmt->bindParam(':phone', $new_phone);
+        $update_stmt->bindParam(':s_id', $s_id);
+
+
+        if ($update_stmt->execute()) {
+            echo "<script type='text/javascript'>";
+            echo 'alert("ข้อมูลถูกปรับปรุงเรียบร้อยแล้ว");';
+            echo 'window.location.href = "profilecenter.php";';
+            echo '</script>';
+        } else {
+            echo "เกิดข้อผิดพลาดในการปรับปรุงข้อมูล";
+        }
+    }
+} catch (PDOException $e) {
+    echo "เกิดข้อผิดพลาด: " . $e->getMessage();
 }
 
 ?>
@@ -62,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             if (isset($_SESSION['seller'])) {
                 $s_id = $_SESSION['seller'];
-                $stmt = $conn->query("SELECT * FROM tb_seller WHERE s_id = $s_id");
+                $stmt = $conn->prepare("SELECT * FROM tb_masterlogin WHERE master_id = $s_id");
                 $stmt->execute();
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
             }
@@ -127,7 +134,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <div class="card mb-4">
                                 <div class="card-header">ข้อมูลทั่วไป</div>
                                 <div class="card-body">
-                                    <form method="post">
+                                    <?php
+                                    // ดึงข้อมูลผู้ใช้จากฐานข้อมูล
+                                    if (isset($_SESSION['seller'])) {
+                                        $s_id = $_SESSION['seller'];
+                                        $stmt = $conn->prepare("SELECT * FROM tb_seller WHERE s_id = :s_id");
+                                        $stmt->bindParam(':s_id', $s_id);
+                                        $stmt->execute();
+                                        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+                                    }
+                                    ?>
+                                    <form action="" method="post">
                                         <!-- Form Row-->
                                         <div class="row gx-3 mb-3">
                                             <!-- Form Group (username)-->
@@ -163,11 +180,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             <!-- Form Group (address)-->
                                             <!-- <div class="col-md-6">
                                                 <label class="small mb-1" for="">ที่อยู่</label>
-                                                <textarea class="form-control" id="address" name="address"><?= $user['address'] ?></textarea>
+                                                <textarea class="form-control" id="address" name="address"><?= $seller['address'] ?></textarea>
                                             </div> -->
 
                                         </div>
-                                        <button type="submit" class="btn btn-primary mb-3">บันทึกข้อมูล</button>
+                                        <button type="submit" class="btn btn-primary">บันทึกข้อมูล</button>
+                                        <a href="sellervouchers.php" class="btn btn-danger">ยกเลิก</a>
                                     </form>
                                 </div>
                             </div>

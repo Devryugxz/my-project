@@ -23,7 +23,7 @@ if (!isset($_SESSION['seller'])) {
 
             if (isset($_SESSION['seller'])) {
                 $s_id = $_SESSION['seller'];
-                $stmt = $conn->query("SELECT * FROM tb_seller WHERE s_id = $s_id");
+                $stmt = $conn->query("SELECT * FROM tb_masterlogin WHERE master_id = $s_id");
                 $stmt->execute();
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
             }
@@ -71,9 +71,9 @@ if (!isset($_SESSION['seller'])) {
                         <div class="col-lg-6">
                             <!-- Account details card-->
                             <div class="card mb-4">
-                            <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">บัญชีธนาคาร</h6>
-                        </div>
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">บัญชีธนาคาร</h6>
+                                </div>
                                 <div class="card-body">
                                     <?php
                                     $act = (isset($_GET['act']) ? $_GET['act'] : '');

@@ -1,10 +1,10 @@
 <?php
 include('config/db.php');
 
-$ID = filter_input(INPUT_GET, 'ID', FILTER_SANITIZE_NUMBER_INT);
+$ID = htmlspecialchars($_GET['ID']);
 $sql = "SELECT * FROM tb_bank WHERE b_id = :ID";
 $stmt = $conn->prepare($sql);
-$stmt->bindParam(':ID', $ID, PDO::PARAM_INT);
+$stmt->bindParam(':ID', $ID);
 $stmt->execute();
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -52,7 +52,7 @@ $row = $stmt->fetch(PDO::FETCH_ASSOC);
                         <!-- Profile picture image-->
                         <img src="../b_logo/<?php echo $row['b_logo']; ?>" class="img-rounded" style="margin-top: 10px;" width="200px">
                         <img id="blah" src="#" alt="" width="200" class="img-rounded" style="margin-top: 10px;">
-                        <input type="file" required name="b_logo" class="form-control" accept="image/*"
+                        <input type="file" name="b_logo" class="form-control" accept="image/*"
                             onchange="readURL(this);" />
                     </div>
 
