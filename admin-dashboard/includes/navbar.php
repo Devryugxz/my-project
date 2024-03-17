@@ -61,12 +61,12 @@
             <span>จัดการค่าส่ง</span>
         </a>
     </li>
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link" href="previewcenter.php">
             <i class="fas fa-fw fa-wrench"></i>
             <span>หน้าร้านของฉัน</span>
         </a>
-    </li>
+    </li> -->
     <li class="nav-item">
         <a class="nav-link" href="profilecenter.php">
             <i class="fas fa-fw fa-wrench"></i>

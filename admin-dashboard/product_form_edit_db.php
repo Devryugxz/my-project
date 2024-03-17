@@ -2,10 +2,7 @@
 session_start();
 echo '<meta charset="utf-8">';
 include('config/db.php');
-// echo "<pre>";
-// print_r($_POST);
-// echo "</pre>";
-// exit();
+
 if ($_SESSION['role'] != 'seller') {
     Header("Location: product.php");
 }
@@ -36,15 +33,7 @@ if ($upload != '') {
 }
 
 // Use prepared statements to prevent SQL injection
-$sql = "UPDATE tb_product SET 
-	p_name=:p_name,
-	type_id=:type_id,
-	p_detail=:p_detail,
-	p_price=:p_price,
-	p_qty=:p_qty,
-	p_unit=:p_unit,
-	p_img=:newname
-	WHERE p_id=:p_id";
+$sql = "UPDATE tb_product SET p_name=:p_name, type_id=:type_id, p_detail=:p_detail, p_price=:p_price, p_qty=:p_qty, p_unit=:p_unit,	p_img=:newname WHERE p_id=:p_id";
 
 $statement = $conn->prepare($sql);
 $statement->bindParam(':p_name', $p_name);
