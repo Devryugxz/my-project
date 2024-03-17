@@ -28,13 +28,13 @@ $stmt2 = $conn->query($sql2);
 <form action="sellervouchers_form_edit_db.php" method="post" class="form-horizontal" enctype="multipart/form-data">
     <div class="form-group">
         <div class="row">
-            <label for="name" class="col-sm-3 control-label">รูปหนังสือ</label>
-            <div class="col-sm-9">
-                <p>
-                <img src="../p_img/<?php echo $row['p_img']; ?>" width="150px" height="200px" alt="">
-                </p>
-      
-            </div>
+            <div class="col-6">
+                <div class="col-sm-12">
+                    ชื่อสินค้า :
+                </div>
+                <div class="col-sm-12">
+                    <input type="text" name="p_name" required class="form-control">
+                </div>
             </div>
             <div class="col-6">
                 <div class="col-sm-12">
