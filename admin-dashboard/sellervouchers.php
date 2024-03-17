@@ -60,7 +60,7 @@ if (!isset($_SESSION['seller'])) {
 
             <!-- Page Heading -->
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">จัดการโปรโมชันส่วนลด <a href='sellervouchers.php?act=add&ID=$row[p_id]' class='btn btn-info btn-sm'> <span class=''></span>เพิ่มโปรโมชั่น</a></h1>
+                <h1 class="h3 mb-0 text-gray-800">จัดการโปรโมชันส่วนลด <a href='sellervouchers.php?act=add&ID=$row[p_id]' class='btn btn-primary btn-sm'><i class="fas fa-plus"></i> เพิ่มโปรโมชั่น</a></h1>
             </div>
 
             <?php if (isset($_SESSION['success'])) { ?>

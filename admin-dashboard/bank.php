@@ -60,7 +60,7 @@ if (!isset($_SESSION['seller'])) {
 
             <!-- Page Heading -->
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">บัญชีธนาคาร<a href="bank.php?act=add" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> เพิ่มบัญชีใหม่</a></h1>
+                <h1 class="h3 mb-0 text-gray-800">บัญชีธนาคาร <a href="bank.php?act=add" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> เพิ่มบัญชีใหม่</a></h1>
             </div>
 
 

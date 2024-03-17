@@ -60,7 +60,7 @@ if (!isset($_SESSION['seller'])) {
 
             <!-- Page Heading -->
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">ข้อมูลอัตราค่าส่ง<a href="shipping.php?act=add" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> เพิ่มค่าส่ง</a></h1>
+                <h1 class="h3 mb-0 text-gray-800">ข้อมูลอัตราค่าส่ง <a href="shipping.php?act=add" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> เพิ่มค่าส่ง</a></h1>
             </div>
 
             <div class="row">

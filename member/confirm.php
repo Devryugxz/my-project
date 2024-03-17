@@ -2,36 +2,40 @@
 session_start();
 include("config/db.php");
 
-if (isset($_SESSION['c_id'])) {
-    $c_id = $_SESSION['c_id'];
+$c_id = $_SESSION['c_id'];
 
-    if (isset($_POST['btn_update'])) {
-        $recipient_name = htmlspecialchars($_POST['recipient_name']);
-        $address = htmlspecialchars($_POST['address']);
-        $phone = htmlspecialchars($_POST['phone']);
+$select_stmt = "SELECT * FROM tb_address WHERE c_id = :c_id";
 
-        $update_stmt = "UPDATE tb_address SET recipient_name = :recipient_name, address = :address, phone = :phone WHERE c_id = :c_id";
+$query = $conn->prepare($select_stmt);
+$query->bindParam(':c_id', $c_id, PDO::PARAM_INT);
+$query->execute();
+$result = $query->fetch(PDO::FETCH_ASSOC);
 
-        $update_query = $conn->prepare($update_stmt);
-        $update_query->bindParam(':recipient_name', $recipient_name);
-        $update_query->bindParam(':address', $address);
-        $update_query->bindParam(':phone', $phone);
-        $update_query->bindParam(':c_id', $c_id);
+if (isset($_POST['btn_update'])) {
 
-        if ($update_query->execute()) {
-            echo "<script type='text/javascript'>";
-            echo "alert('บันทึกข้อมูลที่อยู่สำเร็จ..');";
-            echo "window.location = 'confirm.php';";
-            echo "</script>";
-        } else {
-            echo "<script type='text/javascript'>";
-            echo "alert('error!');";
-            echo "window.location = 'show_address.php'; ";
-            echo "</script>";
-        }
+    $recipient_name = $_POST['recipient_name'];
+    $address = $_POST['address'];
+    $phone = $_POST['phone'];
+
+    $update_stmt = "UPDATE tb_address SET recipient_name = :recipient_name, address = :address, phone = :phone WHERE c_id = :c_id";
+
+    $update_query = $conn->prepare($update_stmt);
+    $update_query->bindParam(':recipient_name', $recipient_name);
+    $update_query->bindParam(':address', $address);
+    $update_query->bindParam(':phone', $phone);
+    $update_query->bindParam(':c_id', $c_id);
+
+    if ($update_query->execute()) {
+        echo "<script type='text/javascript'>";
+        echo "alert('บันทึกข้อมูลที่อยู่สำเร็จ..');";
+        echo "window.location = 'confirm.php';";
+        echo "</script>";
+    } else {
+        echo "<script type='text/javascript'>";
+        echo "alert('error!');";
+        echo "window.location = 'show_address.php'; ";
+        echo "</script>";
     }
-} else {
-    echo "Session variable 'c_id' not set!";
 }
 ?>
 
@@ -389,9 +393,9 @@ if (isset($_SESSION['c_id'])) {
                                     <li class="list-group-item d-flex justify-content-between bg-light">
                                         <div class="text-success">
                                             <h6 class="my-0">ส่วนลด</h6>
-                                            <small><?php echo $discount_price;?> %</small>
+                                            <small><?php echo $discount_price; ?> %</small>
                                         </div>
-                                        <span class="text-success"><?php echo number_format($net_price,2);?></span>
+                                        <span class="text-success"><?php echo number_format($net_price, 2); ?></span>
                                     </li>
                                     <!-- <li class="list-group-item d-flex justify-content-between">
                                         <span>จำนวนสินค้าทั้งหมด</span>
@@ -409,7 +413,7 @@ if (isset($_SESSION['c_id'])) {
                                     </li>
                                     </ul>
                             </form>
-                            <button type="submit" class="btn btn-primary btn-lg btn-block w-100" onclick="window.location='checkout.php'">สั่งสินค้า</button>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block w-100" onclick="window.location='banking.php'">สั่งสินค้า</button>
                         </div>
                     </div>
                 </div>
