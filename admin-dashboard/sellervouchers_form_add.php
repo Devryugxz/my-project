@@ -36,7 +36,7 @@
         <form action="sellervouchers_form_add_db.php" method="post" class="form-horizontal" enctype="multipart/form-data">
         <div class="form-group">
         <div class="row">
-            <label for="name" class="col-sm-3 control-label">รูปหนังสือ</label>
+            <label for="name" class="col-sm-3 control-label">รูปสินค้า</label>
             <div class="col-sm-9">
                 <p>
                 <img src="../p_img/<?php echo $row['p_img']; ?>" width="150px" height="200px" alt="">
