@@ -8,54 +8,37 @@ if (!isset($_GET["id"])) {
 $p_id = $_GET["id"];
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
 
 <head>
     <?php include('header.php'); ?>
     <style>
+        .item {
+            position: relative;
+            margin: 2%;
+            overflow: hidden;
+            width: 540px;
+        }
 
-		/* these styles are for the demo, but are not required for the plugin */
-		.zoom {
-			display:inline-block;
-			position: relative;
-		}
-		
-		/* magnifying glass icon */
-		.zoom:after {
-			content:'';
-			display:block; 
-			width:33px; 
-			height:33px; 
-			position:absolute; 
-			top:0;
-			right:0;
-		}
+        .item img {
+            max-width: 100%;
 
-		.zoom img {
-			display: block;
-		}
+            -moz-transition: all 0.3s;
+            -webkit-transition: all 0.3s;
+            transition: all 0.3s;
+        }
 
-		.zoom img::selection { background-color: transparent; }
+        .item:hover img {
+            -moz-transform: scale(1.1);
+            -webkit-transform: scale(1.1);
+            transform: scale(1.3);
+        }
+    </style>
 
-		#ex2 img:hover { cursor: url(grab.cur), default; }
-		#ex2 img:active { cursor: url(grabbed.cur), default; }
-	</style>
-    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
-	<script src='jquery.zoom.js'></script>
-	<script>
-		$(document).ready(function(){
-			$('#ex1').zoom();
-			$('#ex2').zoom({ on:'grab' });
-			$('#ex3').zoom({ on:'click' });			 
-			$('#ex4').zoom({ on:'toggle' });
-		});
-	</script>
 </head>
 
 <body>
     <?php include('menutop.php'); ?>
-
     <?php
 
     $stmt = $conn->prepare("SELECT * FROM tb_product as p INNER JOIN tb_type as t ON p.type_id = t.type_id WHERE p.p_id = :p_id");
@@ -84,30 +67,27 @@ $p_id = $_GET["id"];
         <!-- Product section-->
         <section class="py-5">
             <div class="container px-4 px-lg-5 my-5">
-                <form action="cart.php?action=add&code=<?php echo $row["p_name"]; ?>" method="post">
+                <form action="cart.php?act=add&p_id=<?php echo $row['p_id']; ?>" method="post">
                     <div class="row gx-4 gx-lg-5 align-items-center">
-                        <div class="col-md-6 zoom" id='ex1'>
+                        <div class="col-md-6 item" id='ex1'>
                             <a class="card-img-top mb-5 mb-md-0"><?php echo "<img src='p_img/" . $row['p_img'] . "'width='100%'>"; ?></a>
                         </div>
-                        <div class="col-md-6">                       
+                        <div class="col-md-6">
                             <div class="fs-5 mb-5">
-                                <span><?php echo $row["p_name"];?></span>   
-                                <h3><?php echo $row["p_price"];?>บาท</h3>    
-                                <span>จำนวนการเข้าชม  <?php echo $row["p_view"];?> ครั้ง</span>                
+                                <span><?php echo $row["p_name"]; ?></span>
+                                <h3><?php echo $row["p_price"]; ?>บาท</h3>
+                                <span>จำนวนการเข้าชม <?php echo $row["p_view"]; ?> ครั้ง</span>
                             </div>
 
                             <h3 class="fw-bolder">รายละเอียดสินค้า</h3>
                             <p class="lead"><?php echo $row["p_detail"]; ?></p>
-                            <p><?php echo $row["type_name"]; ?></p>
+                            <p>ประเภท: <?php echo $row["type_name"]; ?></p>
 
                             <div class="d-flex">
-                                <input class="form-control text-center me-3" id="inputQuantity" name="quantity" type="text" value="1" style="max-width: 3rem" /> 
-                                คงเหลือ <font color=""> <?php echo $row["p_qty"];?> <?php echo $row["p_unit"];?> </font>
+                                <!-- <input class="form-control text-center me-3" id="inputQuantity" name="amount" type="text" value="1" style="max-width: 10rem" /> -->
+                                <p>คงเหลือ <?php echo $row["p_qty"]; ?> <?php echo $row["p_unit"]; ?></p>
                             </div>
-                            <button class="btn btn-outline-dark flex-shrink-0" type="button">
-                                    <i class="bi-cart-fill me-1"></i>
-                                    เพิ่มลงตะกร้า
-                            </button>
+                            <a href="login.php"><input class="btn btn-success mt-3" type="button" value="เพิ่มลงตะกร้า" class="btnAddAction"></a>
 
                         </div>
                     </div>

@@ -7,7 +7,7 @@ $stmt2 = $conn->query($query2);
         if (input.files && input.files[0]) {
             var reader = new FileReader();
 
-            reader.onload = function (e) {
+            reader.onload = function(e) {
                 $('#blah').attr('src', e.target.result);
             }
 
@@ -32,84 +32,82 @@ if (@$_GET['do'] == 'f') {
 
 <form action="product_form_add_db.php" method="post" class="form-horizontal" enctype="multipart/form-data">
     <div class="form-group">
-        <div class="form-group">
-            <div class="col-sm-2 control-label">
-                ชื่อสินค้า :
+        <div class="row">
+            <div class="col-6">
+                <div class="col-sm-12">ชื่อสินค้า :</div>
+                <div class="col-sm-12">
+                    <input type="text" name="p_name" required class="form-control">
+                </div>
             </div>
-            <div class="col-sm-3">
-                <input type="text" name="p_name" required class="form-control">
+            <div class="col-2">
+                <div class="col-sm-12">ราคา :</div>
+                <div class="col-sm-12">
+                    <input type="number" name="p_price" required class="form-control">
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="col-sm-12">จำนวน :</div>
+                <div class="col-sm-12">
+                    <input type="number" name="p_qty" required class="form-control">
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="col-sm-12">หน่วย :</div>
+                <div class="col-sm-12">
+                    <select name="p_unit" id="p_unit" required class="form-control">
+                        <option value="">กรุณาเลือก</option>
+                        <option value="ชิ้น">ชิ้น</option>
+                        <option value="กล่อง">กล่อง</option>
+                        <option value="อัน">อัน</option>
+                    </select>
+                </div>
             </div>
         </div>
+    </div>
 
-        <div class="form-group">
-            <div class="col-sm-2 control-label">
-                ประเภทสินค้า :
+    <div class="form-group">
+        <div class="row">
+            <div class="col-6">
+                <div class="col-sm-12">ประเภทสินค้า :</div>
+                <div class="col-sm-12">
+                    <select name="type_id" class="form-control" required>
+                        <option value="">เลือกประเภทสินค้า</option>
+                        <?php foreach ($stmt2 as $type) { ?>
+                            <option value="<?php echo $type["type_id"]; ?>">
+                                <?php echo $type["type_name"]; ?>
+                            </option>
+                        <?php } ?>
+                    </select>
+                </div>
             </div>
-            <div class="col-sm-3">
-                <select name="type_id" class="form-control" required>
-                    <option value="">เลือกประเภทสินค้า</option>
-                    <?php foreach ($stmt2 as $type) { ?>
-                        <option value="<?php echo $type["type_id"]; ?>">
-                            <?php echo $type["type_name"]; ?>
-                        </option>
-                    <?php } ?>
-                </select>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-sm-2 control-label">
-                รายละเอียด :
-            </div>
-            <div class="col-sm-3">
-                <textarea name="p_detail" cols="60"></textarea>
+            <div class="col-6">
+                <div class="col-sm-12">รายละเอียด :</div>
+                <div class="col-sm-12">
+                    <textarea name="p_detail" class="form-control"></textarea>
+                </div>
             </div>
         </div>
-        <div class="form-group">
-            <div class="col-sm-2 control-label">
-                ราคา :
-            </div>
-            <div class="col-sm-2">
-                <input type="number" name="p_price" required class="form-control">
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-2 control-label">
-                จำนวน :
-            </div>
-            <div class="col-sm-1">
-                <input type="number" name="p_qty" required class="form-control">
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-6">
+                <div class="col-sm-12">
+                    รูปภาพสินค้า :
+                </div>
+                <div class="col-sm-12">
+                    <img id="blah" src="#" alt="" width="250" class="img-rounded" style="margin-top: 10px;">
+                    <input type="file" name="p_img" required class="form-control" accept="image/*" onchange="readURL(this);" />
+                </div>
             </div>
         </div>
-
-        <div class="form-group">
-            <div class="col-sm-2 control-label">
-                หน่วย :
-            </div>
-            <div class="col-sm-1">
-                <select name="p_unit" id="p_unit" required>
-                    <option value="">กรุณาเลือก</option>
-                    <option value="ชิ้น">ชิ้น</option>
-                    <option value="กล่อง">กล่อง</option>
-                    <option value="อัน">อัน</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-2 control-label">
-                รูปภาพสินค้า :
-            </div>
-            <div class="col-sm-4">
-                <input type="file" name="p_img" required class="form-control" accept="image/*" onchange="readURL(this);" />
-                <img id="blah" src="#" alt="" width="250" class="img-rounded" style="margin-top: 10px;">
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-2">
-            </div>
-            <div class="col-sm-3">
-                <button type="submit" class="btn btn-success">เพิ่มข้อมูล</button>
-                <a href="product.php" class="btn btn-danger">ยกเลิก</a>
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-6">
+                <div class="col-sm-12">
+                    <button type="submit" class="btn btn-success">เพิ่มข้อมูล</button>
+                    <a href="product.php" class="btn btn-danger">ยกเลิก</a>
+                </div>
             </div>
         </div>
     </div>

@@ -60,7 +60,7 @@ if (!isset($_SESSION['seller'])) {
 
             <!-- Page Heading -->
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                <h1 class="h3 mb-0 text-gray-800">จัดการข้อมูล<a href="product.php?act=add" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> เพิ่มสินค้าใหม่</a></h1>
+                <h1 class="h3 mb-0 text-gray-800">จัดการข้อมูล <a href="product.php?act=add" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> เพิ่มสินค้าใหม่</a></h1>
             </div>
 
             <?php if (isset($_SESSION['success'])) { ?>

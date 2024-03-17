@@ -52,7 +52,7 @@ if (isset($_GET['search']) && $_GET['search'] != '') {
                             </li>
                         </ul>
                         <div style="text-align: center; margin-top: 30px">
-                            <a href="register.php" style="padding: 10px 48px; border-radius: 3px; background-color: rgb(13, 28, 99); color: rgb(255, 255, 255); cursor: pointer;">เปิดร้าน</a>
+                            <a href="register_seller.php" style="padding: 10px 48px; border-radius: 3px; background-color: rgb(13, 28, 99); color: rgb(255, 255, 255); cursor: pointer;">เปิดร้าน</a>
                         </div>
                     </div>
                 </div>

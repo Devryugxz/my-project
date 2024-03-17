@@ -2,6 +2,11 @@
 session_start();
 require_once('config/db.php');
 
+
+if (!isset($_SESSION['cart_item'])) {
+  $_SESSION['cart_item'] = array(); // หรือค่าเริ่มต้นที่คุณต้องการ
+}
+
 $p_id = isset($_GET['p_id']) ? $_GET['p_id'] : "";
 $act = isset($_GET['act']) ? $_GET['act'] : "";
 
