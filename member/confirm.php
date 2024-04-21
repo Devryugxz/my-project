@@ -258,7 +258,7 @@ if (isset($_POST['btn_update'])) {
                     <div class="col-md-12 col-lg-4">
                         <div class="summary">
                             <h3>รวมการสั่งซื้อ</h3>
-                            <form id="frmcart" name="frmcart" method="post" action="order_save.php">
+                            <form id="frmcart" name="frmcart" method="post" action="checkout.php">
                                 <?php
                                 $total = 0;
                                 $total2 = 0;
@@ -288,11 +288,11 @@ if (isset($_POST['btn_update'])) {
                                 foreach ($_SESSION['cart_item'] as $p_id => $p_qty) {
                                     try {
                                         $stmt = $conn->prepare("SELECT * FROM tb_product as p
-                                         inner join tb_seller as s
+                                         INNER JOIN tb_seller as s
                                          on p.s_id = s.s_id
                                          
-                                         WHERE p.id=:p_id
-                                         group by s.s_id ");
+                                         WHERE p.p_id=:p_id
+                                         group by s.s_id");
                                         $stmt->bindParam(':p_id', $p_id);
                                         $stmt->execute();
                                         $row = $stmt->fetch();
@@ -300,39 +300,39 @@ if (isset($_POST['btn_update'])) {
                                         echo "Error: " . $e->getMessage();
                                     }
 
-                                    $s_id = $row['s_id'];
+                                    // $s_id = $row['s_id'];
 
-                                    try {
-                                        $stmt = $conn->prepare("SELECT * FROM tb_shipping WHERE s_id=:s_id LIMIT 1");
-                                        $stmt->bindParam(':s_id', $s_id);
-                                        $stmt->execute();
-                                        $ship_row = $stmt->fetch();
-                                    } catch (PDOException $e) {
-                                        echo "Error: " . $e->getMessage();
-                                    }
+                                    // try {
+                                    //     $stmt = $conn->prepare("SELECT * FROM tb_shipping WHERE s_id=:s_id LIMIT 1");
+                                    //     $stmt->bindParam(':s_id', $s_id);
+                                    //     $stmt->execute();
+                                    //     $ship_row = $stmt->fetch();
+                                    // } catch (PDOException $e) {
+                                    //     echo "Error: " . $e->getMessage();
+                                    // }
 
-                                    $dupSeller = array_search($s_id, $seller);
-                                    if ($dupSeller !== false) {
-                                        // echo 'ซ้ำนะไม่บวก';
-                                    } else if ($row['ship_cost'] == "กล่อง, ชิ้น, อัน") {
-                                        $totalShipPrice == 0;
-                                    } else {
-                                        // echo 'ไม่เจอบวกเลย';
-                                        $totalShipPrice += $ship_row['ship_price'];
-                                        array_push($seller, $s_id);
-                                    }
+                                    // $dupSeller = array_search($s_id, $seller);
+                                    // if ($dupSeller !== false) {
+                                    //     // echo 'ซ้ำนะไม่บวก';
+                                    // } else if ($row['ship_cost'] == "กล่อง, ชิ้น, อัน") {
+                                    //     $totalShipPrice == 0;
+                                    // } else {
+                                    //     // echo 'ไม่เจอบวกเลย';
+                                    //     $totalShipPrice += $ship_row['ship_price'];
+                                    //     array_push($seller, $s_id);
+                                    // }
 
-                                    try {
-                                        $stmt = $conn->prepare("SELECT * FROM tb_promotion as pro
-                                                inner join tb_product as p
-                                                on pro.pro_id = p.id 
-                                                WHERE pro_id=:p_id ");
-                                        $stmt->bindParam(':p_id', $p_id);
-                                        $stmt->execute();
-                                        $pro_row = $stmt->fetch();
-                                    } catch (PDOException $e) {
-                                        echo "Error: " . $e->getMessage();
-                                    }
+                                    // try {
+                                    //     $stmt = $conn->prepare("SELECT * FROM tb_promotion as pro
+                                    //             INNER JOIN tb_product as p
+                                    //             on pro.p_id = p.p_id 
+                                    //             WHERE pro_id = :p_id");
+                                    //     $stmt->bindParam(':p_id', $p_id);
+                                    //     $stmt->execute();
+                                    //     $pro_row = $stmt->fetch();
+                                    // } catch (PDOException $e) {
+                                    //     echo "Error: " . $e->getMessage();
+                                    // }
 
 
                                     $sum = $row['p_price'] * $p_qty;
@@ -363,8 +363,8 @@ if (isset($_POST['btn_update'])) {
                                     on p.s_id = s.s_id
                                     INNER JOIN tb_shipping as sh
                                     on s.s_id = sh.s_id
-                                    WHERE p.id 
-                                    GROUP BY sh.s_id  ");
+                                    WHERE p.p_id 
+                                    GROUP BY sh.s_id");
                                         $stmt->execute();
                                         $row2 = $stmt->fetch();
                                     } catch (PDOException $e) {
@@ -383,20 +383,20 @@ if (isset($_POST['btn_update'])) {
                                             </div>
                                             <span class="text-muted"><?php echo "฿ " . $sum; ?></span>
                                         </li>
-                                        <div class="no-records text-center h3">ไม่พบสินค้า</div>
+                                        <!-- <div class="no-records text-center h3">ไม่พบสินค้า</div> -->
                                     <?php
                                 }
 
                                 // echo $sum_discount; 
 
                                     ?>
-                                    <li class="list-group-item d-flex justify-content-between bg-light">
+                                    <!-- <li class="list-group-item d-flex justify-content-between bg-light">
                                         <div class="text-success">
                                             <h6 class="my-0">ส่วนลด</h6>
                                             <small><?php echo $discount_price; ?> %</small>
                                         </div>
                                         <span class="text-success"><?php echo number_format($net_price, 2); ?></span>
-                                    </li>
+                                    </li> -->
                                     <!-- <li class="list-group-item d-flex justify-content-between">
                                         <span>จำนวนสินค้าทั้งหมด</span>
                                         <strong><?php
@@ -413,7 +413,7 @@ if (isset($_POST['btn_update'])) {
                                     </li>
                                     </ul>
                             </form>
-                            <button type="submit" class="btn btn-primary btn-lg btn-block w-100" onclick="window.location='banking.php'">สั่งสินค้า</button>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block w-100" onclick="window.location='checkout.php'">สั่งสินค้า</button>
                         </div>
                     </div>
                 </div>
