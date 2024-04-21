@@ -33,25 +33,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (empty($firstname) || empty($lastname) || empty($username) || empty($password) || empty($c_password) || empty($email) || empty($phone)) {
             $_SESSION['error'] = 'กรุณากรอกข้อมูลทุกช่อง';
             header("location: register.php");
-            exit;
         }
 
         if (strlen($password) < 5) {
             $_SESSION['error'] = 'รหัสผ่านต้องมีความยาวอย่างน้อย 5 ตัวอักษร';
             header("location: register.php");
-            exit;
         }
 
         if ($password != $c_password) {
             $_SESSION['error'] = 'รหัสผ่านไม่ตรงกัน';
             header("location: register.php");
-            exit;
         }
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $_SESSION['error'] = 'รูปแบบอีเมล์ไม่ถูกต้อง';
             header("location: register.php");
-            exit;
         }
 
         try {
