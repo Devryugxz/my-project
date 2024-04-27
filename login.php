@@ -32,7 +32,7 @@ if (isset($_POST['login'])) {
                         header("location: admin/index.php");
                     } else if ($row['role'] == 'seller') {
                         $_SESSION['seller'] = $row['master_id'];
-                        header("location: admin-dashboard/index.php");
+                        header("location: adminlte/index.php");
                     } else {
                         $_SESSION['customer'] = $row['master_id'];
                         header("location: member/index.php");
