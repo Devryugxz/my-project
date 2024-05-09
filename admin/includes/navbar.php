@@ -1,58 +1,101 @@
-<!-- Sidebar -->
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+<?php
+session_start();
+require_once 'config/db.php';
 
-    <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
-        <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-laugh-wink"></i>
-        </div>
-        <div class="sidebar-brand-text mx-3">Admin</div>
-    </a>
+if (!isset($_SESSION['admin'])) {
+  $_SESSION['error'] = 'กรุณาเข้าสู่ระบบ';
+  header("location: ../login.php");
+}
+?>
 
-    <!-- Divider -->
-    <hr class="sidebar-divider my-0">
-
-    <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
-        <a class="nav-link" href="index.php">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>หน้าหลัก</span></a>
-    </li>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        Interface
-    </div>
+<!-- Navbar -->
+<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+  <!-- Left navbar links -->
+  <ul class="navbar-nav">
     <li class="nav-item">
-        <a class="nav-link" href="customer.php">
-            <i class="fas fa-fw fa-wrench"></i>
-            <span>จัดการข้อมูลลูกค้า</span>
-        </a>
+      <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
     </li>
+    <li class="nav-item d-none d-sm-inline-block">
+      <a href="index.php" class="nav-link">หน้าหลัก</a>
+    </li>
+  </ul>
+
+  <!-- Right navbar links -->
+  <ul class="navbar-nav ml-auto">
+    <!-- <li class="nav-item">
+        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+          <i class="fas fa-expand-arrows-alt"></i>
+        </a>
+      </li> -->
     <li class="nav-item">
-        <a class="nav-link" href="seller.php">
-            <i class="fas fa-fw fa-wrench"></i>
-            <span>จัดการข้อมูลผู้ประกอบการ</span>
-        </a>
+      <a class="nav-link" href="logout.php">
+        <i class="fas fa-sign-out-alt"></i>
+        ออกจากระบบ
+      </a>
     </li>
+  </ul>
+</nav>
+<!-- /.navbar -->
 
-    <!-- Divider -->
-    <hr class="sidebar-divider">
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <!-- Brand Logo -->
+  <a href="index.php" class="brand-link">
+    <img src="img/logo.png" class="brand-image img-circle elevation-3" style="opacity: .8">
+    <span class="brand-text font-weight-light">ขายมะม่วงออนไลน์</span>
+  </a>
 
-    <!-- Sidebar Toggler (Sidebar) -->
-    <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <?php
+
+    if (isset($_SESSION['admin'])) {
+      $a_id = $_SESSION['admin'];
+      $stmt = $conn->query("SELECT * FROM tb_masterlogin WHERE master_id = $a_id");
+      $stmt->execute();
+      $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    ?>
+    <!-- Sidebar user panel (optional) -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="image">
+        <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+      </div>
+      <div class="info">
+        <a href="#" class="d-block"><?php echo $row['username'] ?></a>
+      </div>
     </div>
 
-
-
-</ul>
-<!-- End of Sidebar -->
-
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+        <li class="nav-item menu-open">
+          <a href="index.php" class="nav-link active">
+            <i class="fas fa-home"></i>
+            <p> หน้าหลัก</p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="customer.php" class="nav-link">
+            <i class="nav-icon fas fa-clipboard-list"></i>
+            <p>
+              จัดการข้อมูลลูกค้า
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="seller.php" class="nav-link">
+            <i class="nav-icon fas fa-clipboard-list"></i>
+            <p>
+              จัดการข้อมูลผู้ประกอบการ
+            </p>
+          </a>
+        </li>
+    </nav>
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
+</aside>
